@@ -1,0 +1,42 @@
+.container {
+    margin: 0 auto;
+    margin-top: 10%;
+    width: 450px;
+    height: 400px;
+  
+    text-align: center;
+    align-items: center;
+    background: linear-gradient(135deg, #3d3024, #4e4216);
+    padding: 40px 60px;
+    border-radius: 15px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 2s ease-out;
+  }
+  
+  .title {
+    font-size: 3rem;
+    color: #fff;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+  }
+  
+  .description {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    opacity: 0.8;
+  }
+  
+
+  
+  /* Animaciones */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+

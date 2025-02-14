@@ -1,0 +1,94 @@
+.hero {
+    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.6)), url('/static/img/fondo.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    padding: 70px 20px;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 300px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: white ;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+h2{
+    color: white;
+}
+
+.hero p {
+    color: white;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.promociones {
+    background-color: #3e1e03;
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.promociones h2 {
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+.promociones-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.promo {
+    width: 400px;
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    color: #333;
+    width: 200px;
+}
+
+.promo img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.promo h3 {
+    margin-top: 15px;
+    font-size: 20px;
+}
+
+.promo p {
+    margin-top: 10px;
+} 
+
+
+
+
+
+
+.botones{
+   
+    text-align: center; /* Centra el contenido del footer */
+    padding: 20px; /* Espaciado para mejor apariencia */
+   
+}
+
+.botones a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff; /* Color azul tipo botón */
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background 0.3s ease;
+}
+
+.botones a:hover {
+    background-color: #0056b3; /* Color más oscuro al pasar el mouse */
+}

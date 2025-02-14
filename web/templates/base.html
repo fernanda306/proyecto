@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{%block titulo%}  mi sitio {% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+</head>
+<body>
+
+
+    <header>
+        <nav>
+            <a href="{% url 'home' %}">
+                <div class="logo">
+                    <img src="{% static 'img/CASAMIA.jpeg' %}" alt="">
+                </div>
+            </a>
+
+            <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+
+
+            <input type="checkbox" id="check">
+            <label for="check" class="checkbtn">
+                <img src="{% static 'img/casa.png' %}" width="30px" height="30px">
+            </label>
+            <ul class="menu">
+                <li class="dropdown">
+                    <a class="dropdown-toggle">Nosotros</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{% url 'mision'%}">Misión</a></li>
+                        <li><a href="{% url 'vision'%}">Visión</a></li>
+                        <li><a href="{% url 'buzon'%}">Buzón de sugerencias</a></li>
+                        <li><a href="{% url 'mapa'%}">Ubicación</a></li> 
+                      
+
+                    </ul>
+                </li>
+            
+              
+                        
+                       
+                <li><a href="{% url 'carta'%}">carta</a></li>
+                <li><a href="{% url 'galeria'%}">Galeria</a></li>
+
+
+                <li class="dropdown">
+                    <a href="{% url 'info'%}" class="dropdown-toggle">Servcios</a>
+                    <a class="dropdown-toggle"></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{% url 'mision'%}">reservas</a></li>
+                        <li><a href="{% url 'vision'%}">domicilios</a></li>
+                       
+                      
+
+                    </ul>
+                </li>
+
+                <li ><a href="{% url 'registrarse'%}">  <img src="{% static 'img/usuario.png' %}"  width="20px" height="20px"></a></li>
+            </ul>
+        </nav>
+
+        
+
+
+    </header>
+    
+    
+
+   
+
+    
+ 
+        {% block content %}
+        {% endblock %}
+
+
+
+
+
+    
+    <footer>
+        <div class="footer-container">
+            <div class="social-media">
+
+
+
+                <div class="address">
+                    <h3>Dirección</h3>
+                    <p>Calle 8 N 3-54 esquina, barrio Nazareth</p>
+                </div>
+                
+                
+            </div>
+
+            <div class="hours">
+                <h3>Horarios de Atención</h3>
+                <p>Lunes a Viernes</p>
+                <p>4:00 pm a 11:pm</p>
+               
+            </div>
+
+
+            <h3>Síguenos</h3>
+            <ul>
+                <li><a href="https://www.facebook.com/CASAMIAGARZON" target="_blank"><img src="{% static 'img/facebook.png' %}" width="30px" height="30px"></a></li>
+                <li><a href="https://www.instagram.com/casamiagarzon/" target="_blank"> <img src="{% static 'img/instagram.png' %}" width="30px" height="30px"></a></li>
+               
+               
+            </ul>
+
+          
+        </div>
+    </footer>
+   
+   
+    
+    
+</body>
+</html>

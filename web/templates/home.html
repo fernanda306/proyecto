@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+
+{% block title %} inicio {%endblock%}
+{% block content %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+
+
+<section class="hero">
+    <h1>CASA MIA</h1>
+    <br>
+    <h2>FOOD-PUB</h2>
+    <h2>comidas rapidas</h2>
+
+    <p>Disfruta de nuestras deliciosas promociones y menús exclusivos!.</p>
+
+
+
+     
+
+</section>
+
+
+<section class="promociones">
+    <h2>La mejor  comida está en CASAMIA! </h2>
+    <div class="promociones-grid">
+        <div class="promo">
+            <img src="{% static 'img/1.jpeg' %}" alt="Crispy Pork" >
+            <h3>Crispy Pork</h3>
+            <p>Disfruta con tu amigo y ahorra</p>
+        </div>
+        <div class="promo">
+            <img src="{% static 'img/combo kids.jpeg' %}" alt="Combo Kids">
+            <h3>Combo Kids</h3>
+            <p>Uno para que tus niños...</p>
+        </div>
+        <div class="promo">
+            <img src="{% static 'img/chingona.jpeg' %}" alt="Chingona">
+            <h3>Chingona</h3>
+            <p>Te gustan los sabores picantes</p>
+        </div>
+    </div>
+</section>
+
+
+
+    {% endblock %}
