@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages 
 from django.contrib.auth import authenticate, login as auth_login
 
+
 # Create your views here.
 def home(request):
     return render (request, 'home.html')
@@ -13,6 +14,9 @@ def home(request):
 
 def buzon(request):
     return render (request,'buzon.html')
+
+
+
 
 def carta(request):
     return render (request, 'carta.html')
@@ -46,13 +50,11 @@ def registrarse(request):
             user = authenticate(request, username=username, password=password) 
             if user is not None: 
                 auth_login(request, user) 
-                messages.success(request, "¡Registro exitoso! Has iniciado sesión.") 
+                messages.success(request, "¡Registro exitoso!") 
                 return redirect('login')
 
 
     return render(request, 'registrarse.html')
-
-
 
 def vision(request):
     return render (request, 'vision.html')
@@ -69,33 +71,34 @@ def info(request):
     return render (request, 'info.html')
 
 def login(request):
-    if request.method == 'POST': 
-            username = request.POST['username'] 
-            password = request.POST['password'] 
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
 
+        if not username or not password:
+            messages.error(request, 'Por favor, ingresa ambos campos.')
+            return render(request, 'login.html')
 
-            if not username or not password:
+        try:
+            user = User.objects.get(username=username)  # Renombré User a user
+        except User.DoesNotExist:  # Corregí el error tipográfico aquí
+            messages.error(request, 'El usuario no existe.')
+            return render(request, 'login.html')
 
-                messages.error(request, 'Por favor, ingresa ambos campos.') 
-                return render(request, 'login.html') 
-            
-                try: 
-                    user = User.objects.get(username=username) 
-                except User.DoesNotExist: 
-                  messages.error(request, 'El usuario no existe.') 
-                return render(request, 'login.html') 
-            
-
-                if user is not None: 
-                      authenticated_user= authenticate(request, username=user.username, password=password) 
-
-                if authenticated_user is not None: 
-                        auth_login(request, authenticated_user) 
-                        return redirect('carta') 
-                else: 
-                        messages.error(request, "Contraseña incorrecta.") 
-            else: 
-                messages.error(request, "El usuario no está registrado.") 
+        # Intentar autenticar al usuario
+        authenticated_user = authenticate(request, username=username, password=password)
+        if authenticated_user is not None:
+            auth_login(request, authenticated_user)
+            return redirect('home')
+        else:
+            messages.error(request, "Contraseña incorrecta.")
+    
     return render(request, 'login.html')
 
- 
+            
+
+def reservas(request):
+    return render (request, 'reservas.html')
+
+def domicilios(request):
+    return render (request, 'domicilios.html')

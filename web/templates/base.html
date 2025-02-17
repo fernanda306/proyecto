@@ -15,11 +15,12 @@
         <nav>
             <a href="{% url 'home' %}">
                 <div class="logo">
-                    <img src="{% static 'img/CASAMIA.jpeg' %}" alt="">
+                    <img src="{% static 'img/CASAMIA.jpeg' %}" alt="" >
+                        <h1> Restaurante</h1>
                 </div>
             </a>
 
-            <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+        
 
 
             <input type="checkbox" id="check">
@@ -47,18 +48,18 @@
 
 
                 <li class="dropdown">
-                    <a href="{% url 'info'%}" class="dropdown-toggle">Servcios</a>
+                    <a href="dropdown-toggle">Servicios</a>
                     <a class="dropdown-toggle"></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{% url 'mision'%}">reservas</a></li>
-                        <li><a href="{% url 'vision'%}">domicilios</a></li>
+                        <li><a href="{% url 'reservas'%}">Reservaciones</a></li>
+                        <li><a href="{% url 'domicilios'%}">domicilios</a></li>
                        
                       
 
                     </ul>
                 </li>
 
-                <li ><a href="{% url 'registrarse'%}">  <img src="{% static 'img/usuario.png' %}"  width="20px" height="20px"></a></li>
+                <li ><a href="{% url 'registrarse'%}">  <img src="{% static 'img/perfil.png' %}"  width="20px" height="20px"></a></li>
             </ul>
         </nav>
 
@@ -80,38 +81,24 @@
 
 
 
-    
-    <footer>
+
+
+    <footer class="footer">
         <div class="footer-container">
-            <div class="social-media">
-
-
-
-                <div class="address">
-                    <h3>Dirección</h3>
-                    <p>Calle 8 N 3-54 esquina, barrio Nazareth</p>
-                </div>
-                
-                
+            <div>
+                <h4>Dirección</h4>
+                <p>Calle 8 N 3-54 esquina, barrio Nazareth</p>
             </div>
-
-            <div class="hours">
-                <h3>Horarios de Atención</h3>
+            <div>
+                <h4>Horarios de Atención</h4>
                 <p>Lunes a Viernes</p>
-                <p>4:00 pm a 11:pm</p>
-               
+                <p>4:00 pm a 11:00 pm</p>
             </div>
-
-
-            <h3>Síguenos</h3>
-            <ul>
-                <li><a href="https://www.facebook.com/CASAMIAGARZON" target="_blank"><img src="{% static 'img/facebook.png' %}" width="30px" height="30px"></a></li>
-                <li><a href="https://www.instagram.com/casamiagarzon/" target="_blank"> <img src="{% static 'img/instagram.png' %}" width="30px" height="30px"></a></li>
-               
-               
-            </ul>
-
-          
+            <div class="social-icons">
+                <h4>Síguenos</h4>
+                <a href="https://www.instagram.com/casamiagarzon/"><img src="{% static 'img/instagram.png' %}"  alt="Instagram"></a>
+                <a href="https://www.facebook.com/search/top?q=casamia%20garzon"><img src="{% static 'img/facebook.png' %}" alt="Facebook"></a>
+            </div>
         </div>
     </footer>
    

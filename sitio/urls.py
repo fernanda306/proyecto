@@ -19,6 +19,8 @@ from django.urls import path
 from web import views
 from django.contrib.auth import views as auth_views
 
+
+
 urlpatterns = [
 
     path('admin/', admin.site.urls),
@@ -33,15 +35,12 @@ urlpatterns = [
     path('registrarse',views.registrarse,name='registrarse'),
     path('vision',views.vision,name='vision'),
     path('fotos',views.fotos,name='fotos'),
-       path('videos',views.videos,name='videos'),
-
-          path('info',views.info,name='info'),
-
+    path('videos',views.videos,name='videos'),
+    path('info',views.info,name='info'),
     path('login',views.login,name='login'),
+    
+    path('domicilios',views.domicilios,name='domicilios'),
+     path('reservas',views.reservas,name='reservas'),
 
-     
-
-
-   
 
 ]

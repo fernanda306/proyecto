@@ -3,7 +3,7 @@
   height: 4px;
   display: flex; /* Esto es necesario para que justify-content funcione */
   justify-content: center;
-  background-color: rgb(92, 76, 16);
+  background-color: #61361a ;
 }
 
 /* Estilo de navegación */
@@ -42,13 +42,11 @@
 /* Carrusel */
 .carousel {
   position: relative;
-  width: 80%; 
+  width: 100%; 
   height: 400px; 
-  margin: 0 auto;
-  margin-top: 25px;
+
+
   overflow: hidden;
-  border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   margin-bottom: 10%;
 }
 
@@ -58,44 +56,13 @@
 }
 
 .slide {
-  min-width: 100%;
+  min-width: 1000px;
 }
 
 .slide img {
-  width: 60%;
-  height: 70%; 
-  object-fit: cover; 
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
+  width: 100%;
+  height: 40%; 
 
-.carousel-button {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.6);
-  color: white;
-  border: none;
-  border-radius: 50%;
-  padding: 12px 16px;
-  font-size: 18px;
-  cursor: pointer;
-  z-index: 2;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.carousel-button.prev {
-  left: 15px;
-}
-
-.carousel-button.next {
-  right: 15px;
-}
-
-.carousel-button:hover {
-  background-color: rgba(255, 255, 255, 0.8);
-  color: black;
-  transform: translateY(-50%) scale(1.1);
 }
 
 
@@ -107,25 +74,20 @@
 }
 
 .carousel-track {
-  animation: slide 10s infinite; 
+  animation: slide 30s infinite; 
 }
 
 
-.titulo{
-  text-align: center;
-  margin-top: 20px;
-}
 .fotos {
   display: flex; 
   justify-content: center; 
-  align-items: center; 
-  gap: 50px; 
-  padding: 20px; 
+  /* align-items: center;  */
+  /* padding: 20px;  */
 }
 
 .fotos img {
-  width: 250px; 
-  height: auto; 
+  width: 300px; 
+  height: 100%; 
   border-radius: 10px; 
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
   transition: transform 0.3s ease; 

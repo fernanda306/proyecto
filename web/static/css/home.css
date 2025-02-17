@@ -1,5 +1,5 @@
 .hero {
-    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.6)), url('/static/img/fondo.png');
+     background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.6)); 
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -10,30 +10,33 @@
 .hero h1 {
     font-size: 300px;
     font-family: Georgia, 'Times New Roman', Times, serif;
-    color: white ;
+    color: rgb(0, 0, 0) ;
     font-size: 36px;
     font-weight: bold;
 }
 
 h2{
-    color: white;
+    color: rgb(0, 0, 0);
 }
 
+.promo1{
+    color: #ffffff;
+}
 .hero p {
-    color: white;
+    color: rgb(0, 0, 0);
     font-size: 18px;
     margin-top: 10px;
 }
 
 .promociones {
-    background-color: #3e1e03;
+    background-color: #61361a;
     text-align: center;
-    padding: 80px 20px;
+     padding: 80px 10px; 
 }
 
 .promociones h2 {
     font-size: 28px;
-    margin-bottom: 30px;
+    margin-bottom: 30px; 
 }
 
 .promociones-grid {
@@ -64,7 +67,7 @@ h2{
 
 .promo p {
     margin-top: 10px;
-} 
+}
 
 
 
@@ -72,10 +75,10 @@ h2{
 
 
 .botones{
-   
+
     text-align: center; /* Centra el contenido del footer */
     padding: 20px; /* Espaciado para mejor apariencia */
-   
+
 }
 
 .botones a {
@@ -92,3 +95,125 @@ h2{
 .botones a:hover {
     background-color: #0056b3; /* Color más oscuro al pasar el mouse */
 }
+
+
+
+
+
+
+/* Carrusel */
+.carousel {
+    position: relative;
+    width: 100%;
+    height: 400px;
+     overflow: hidden; 
+
+  
+  }
+
+  .carousel-track {
+    display: flex;
+    transition: transform 0.8s ease-in-out;
+  }
+
+  .slide {
+    min-width: 1000px;
+  }
+
+  .slide img {
+    width: 100%;
+    height: 40%;
+    opacity: 0.5 ; /* Hace las imágenes más opacas */
+
+  }
+
+
+  @keyframes slide {
+    0% { transform: translateX(0); }
+    33% { transform: translateX(-100%); }
+    66% { transform: translateX(-200%); }
+    100% { transform: translateX(0); }
+  }
+
+  .carousel-track {
+    animation: slide 30s infinite;
+  }
+
+
+  .fotos {
+    display: flex;
+    justify-content: center;
+
+  }
+
+  .fotos img {
+    width: 300px;
+    height: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+
+  .fotos img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  }
+
+
+  @media (max-width: 768px) {
+    .carousel {
+        height: 200px;
+    }
+
+    .fotos {
+        gap: 10px;
+    }
+
+    .fotos img {
+        width: 100%;
+        max-width: 150px;
+       
+    }
+  }
+
+  @media (max-width: 480px) {
+    header .logo h1 {
+        font-size: 20px;
+    }
+
+    nav ul li a {
+        font-size: 12px;
+    }
+
+    .carousel-button {
+        padding: 8px 10px;
+        font-size: 14px;
+    }
+
+    .uno h2 {
+        font-size: 18px;
+    }
+
+    .uno p {
+        font-size: 12px;
+    }
+  } 
+
+
+
+
+
+
+.text-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: rgb(0, 0, 0);
+
+    padding: 20px;
+
+}
+
+

@@ -14,11 +14,11 @@ h1 {
     margin: auto;
 }
 
-.galeria div {
+ .galeria div {
     position: relative;
-    overflow: hidden;
-    border-radius: 8px;
-}
+   
+    border-radius: 10px;
+} 
 
 .galeria img {
     width: 100%;
