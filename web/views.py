@@ -67,8 +67,7 @@ def fotos(request):
 def videos(request):
     return render (request, 'videos.html')
 
-def info(request):
-    return render (request, 'info.html')
+
 
 def login(request):
     if request.method == 'POST':
