@@ -6,6 +6,10 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login
 
 
+
+from django.shortcuts import render
+
+
 # Create your views here.
 def home(request):
     return render (request, 'home.html')
@@ -101,3 +105,9 @@ def reservas(request):
 
 def domicilios(request):
     return render (request, 'domicilios.html')
+
+def gracias(request):
+    return render (request, 'gracias.html')
+
+
+

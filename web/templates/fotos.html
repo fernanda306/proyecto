@@ -7,7 +7,7 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/fotos.css'%}">
 
-
+<!-- 
 <h1>Galería de imágenes</h1>
 <div class="galeria">
 
@@ -39,6 +39,27 @@
   
     
     
+</div> -->
+<!-- <base href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/wanaka-tree.jpg"> -->
+<div id="carousel">
+  <figure id="spinner">
+    <img src="{% static 'img/1.jpeg' %}" alt>
+    <img src="{% static 'img/2.jpeg' %}" alt>
+    <img src="{% static 'img/20.jpeg' %}" alt>
+    <img src="{% static 'img/4.jpeg' %}" alt>
+    <img src="{% static 'img/5.jpeg' %}" alt>
+    <img src="{% static 'img/6.jpeg' %}" alt>
+    <img src="{% static 'img/7.jpeg' %}" alt>
+    <img src="{% static 'img/8.jpeg' %}" alt>
+  </figure>
 </div>
+<span style="float:left" class="ss-icon" onclick="galleryspin('-')">&lt;</span>
+<span style="float:right" class="ss-icon" onclick="galleryspin('')">&gt;</span>
+
+
+
+<script src=" {% static 'js/fotos.js' %}"></script>
+
+
 
 {% endblock %}

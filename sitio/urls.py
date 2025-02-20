@@ -18,6 +18,10 @@ from django.contrib import admin
 from django.urls import path
 from web import views
 from django.contrib.auth import views as auth_views
+from django.urls import path
+from django.urls import path, include
+
+from django.urls import path
 
 
 
@@ -27,7 +31,7 @@ urlpatterns = [
     # path('', include('main.urls')),
     # path('accounts/', include('django.contrib.auth.urls')),
     path('',views.home,name='home'),
-    path('buzon',views.buzon,name='buzon'),
+
     path('carta',views.carta,name='carta'),
     path('galeria',views.galeria,name='galeria'),
     path('mapa',views.mapa,name='mapa'),
@@ -41,5 +45,12 @@ urlpatterns = [
     path('domicilios',views.domicilios,name='domicilios'),
      path('reservas',views.reservas,name='reservas'),
 
+    
 
+    path('buzon/', views.buzon, name='buzon'),
+    path('gracias/', views.gracias, name='gracias'),
+
+    
 ]
+
+

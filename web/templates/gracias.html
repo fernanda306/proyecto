@@ -1,0 +1,16 @@
+
+{% extends 'base.html' %}
+
+
+{% block title %} inicio {%endblock%}
+{% block content %}
+
+{% load static %}
+
+<body>
+    <h2>¡Gracias por tu sugerencia!</h2>
+    <p>Tu mensaje ha sido recibido.</p>
+    <a href="{% url 'enviar_sugerencia' %}">Enviar otra sugerencia</a>
+</body>
+
+{% endblock %}     
