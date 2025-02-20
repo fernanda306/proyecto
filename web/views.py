@@ -4,6 +4,13 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User 
 from django.contrib import messages 
 from django.contrib.auth import authenticate, login as auth_login
+from .models import Producto
+
+
+from django.core.mail import send_mail
+from django.shortcuts import render, redirect
+from django.conf import settings
+from .forms import SugerenciaForm
 
 
 # Create your views here.
@@ -102,3 +109,28 @@ def reservas(request):
 
 def domicilios(request):
     return render (request, 'domicilios.html')
+
+
+def productos(request):
+    productos = Producto.objects.all()  # Obtiene todos los productos
+    return render(request, 'productos.html', {'productos': productos})
+
+
+
+
+def buzon(request):
+    if request.method == 'POST':
+        form = SugerenciaForm(request.POST)
+        if form.is_valid():
+            sugerencia = form.cleaned_data['sugerencia']
+            email = form.cleaned_data.get('email', 'usuario_anonimo@example.com')
+            send_mail(
+                subject='Nueva Sugerencia',
+                message=f'Sugerencia de {email}:\n\n{sugerencia}',
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[settings.ADMIN_EMAIL],
+            )
+            return redirect('gracias')
+    else:
+        form = SugerenciaForm()
+    return render(request, 'buzon.html', {'form': form})

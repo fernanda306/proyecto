@@ -140,3 +140,19 @@ STATICFILES_DIRS=[os.path.join(BASE_DIR,'web/static')]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+import os
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.tudominio.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'tuemail@tudominio.com'
+EMAIL_HOST_PASSWORD = 'tucontraseña'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+ADMIN_EMAIL = 'admin@tudominio.com'
+

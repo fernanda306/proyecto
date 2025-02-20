@@ -1,0 +1,106 @@
+
+h2 .titulo{
+    text-align: center;
+}
+
+.menu-container {
+    width: 60%;
+    margin: auto;
+
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.titulo {
+    background-color: rgb(221, 187, 51);
+    color: white;
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 24px;
+}
+
+.opcion {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.opcion img {
+    width: 200px;
+    height: auto;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+
+.descripcion {
+    text-align: left;
+}
+
+h3 {
+    font-size: 20px;
+    margin: 0;
+}
+
+h3 span {
+    color: #d33;
+    font-weight: bold;
+}
+
+p {
+    font-size: 14px;
+    color: #555;
+}
+
+.ordenar {
+    text-align: center;
+    background: green;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.ordenar:hover {
+    background: darkgreen;
+}
+
+
+/* Centrar el contenido dentro del pie de página */
+footer.uno {
+    text-align: center;
+    background-color: #333;
+    padding: 20px 0; 
+}
+
+/* Establecer el color del texto a blanco */
+footer .letra {
+    color: white;
+    font-size: 18px; }
+
+/* Estilo para la lista y los iconos sociales */
+footer .social ul {
+    list-style-type: none; 
+    padding: 0;
+}
+
+footer .social ul li {
+    display: inline-block;
+    margin: 0 10px; 
+}
+
+
+footer .social a img {
+    width: 30px;
+    height: 30px;
+    transition: transform 0.3s ease;
+}
+
+footer .social a:hover img {
+    transform: scale(1.1); 
+}

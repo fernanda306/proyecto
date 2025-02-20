@@ -18,6 +18,11 @@ from django.contrib import admin
 from django.urls import path
 from web import views
 from django.contrib.auth import views as auth_views
+from django.conf import settings
+from django.conf.urls.static import static
+
+
+
 
 
 
@@ -27,8 +32,8 @@ urlpatterns = [
     # path('', include('main.urls')),
     # path('accounts/', include('django.contrib.auth.urls')),
     path('',views.home,name='home'),
-    path('buzon',views.buzon,name='buzon'),
-    path('carta',views.carta,name='carta'),
+    # path('buzon',views.buzon,name='buzon'),
+    # path('carta',views.carta,name='carta'),
     path('galeria',views.galeria,name='galeria'),
     path('mapa',views.mapa,name='mapa'),
     path('mision',views.mision,name='mision'),
@@ -41,6 +46,10 @@ urlpatterns = [
     
     path('domicilios',views.domicilios,name='domicilios'),
      path('reservas',views.reservas,name='reservas'),
+    path('productos/',views.productos, name='productos'),
+    path('buzon/', views.buzon, name='buzon'),
+     
 
 
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
