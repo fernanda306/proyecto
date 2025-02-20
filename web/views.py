@@ -113,13 +113,12 @@ def reservas(request):
 def domicilios(request):
     return render (request, 'domicilios.html')
 
-<<<<<<< HEAD
+
 def gracias(request):
     return render (request, 'gracias.html')
 
 
 
-=======
 
 def productos(request):
     productos = Producto.objects.all()  # Obtiene todos los productos
@@ -144,4 +143,4 @@ def buzon(request):
     else:
         form = SugerenciaForm()
     return render(request, 'buzon.html', {'form': form})
->>>>>>> a77b5d777e7bf2b608827958df88ac334517cce9
+

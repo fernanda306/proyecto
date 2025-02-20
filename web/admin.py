@@ -10,8 +10,6 @@ from .models import Producto
 #     model = producto
 #     list_display =('nombre','descripcion','pecio','fecha_creacion')
 
-<<<<<<< HEAD
-=======
 @admin.register(Producto)
 class ProductoAdmin(admin.ModelAdmin):
     list_display = ('id', 'nombre', 'precio', 'cantidad', 'mostrar_imagen')
@@ -24,4 +22,4 @@ class ProductoAdmin(admin.ModelAdmin):
         return "Sin imagen"
     
     mostrar_imagen.short_description = "Imagen"
->>>>>>> a77b5d777e7bf2b608827958df88ac334517cce9
+
