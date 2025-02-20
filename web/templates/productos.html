@@ -8,8 +8,35 @@
 
 <link rel="stylesheet" href="{% static 'css/productos.css'%}">
 
-
-<h1 class="titulo">Lista de Productos</h1>
+<div class="container">
+	<header>
+		
+		<form action="javascript:void(0);">
+			<input type="text" id="bar-search" class="bar-search" placeholder="Buscar">
+		</form>
+		
+		<div id="categories" class="categories">
+			<a href="javascript:void(0);" class="active">
+			 Todo
+			</a>
+			
+			<a href="javascript:void(0);">
+			 Hamburguesas
+			</a>
+			
+			<a href="javascript:void(0);">
+			 Patacolos
+			</a>
+			
+			<a href="javascript:void(0);">
+			 Perros calientes
+			</a>
+			
+			<a href="javascript:void(0);">
+			 Salchipapas
+			</a>
+		</div>
+	</header>
     
 {% if productos %}
     <div class="productos-container">
