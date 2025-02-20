@@ -18,10 +18,18 @@ from django.contrib import admin
 from django.urls import path
 from web import views
 from django.contrib.auth import views as auth_views
+<<<<<<< HEAD
 from django.urls import path
 from django.urls import path, include
 
 from django.urls import path
+=======
+from django.conf import settings
+from django.conf.urls.static import static
+
+
+
+>>>>>>> a77b5d777e7bf2b608827958df88ac334517cce9
 
 
 
@@ -31,8 +39,13 @@ urlpatterns = [
     # path('', include('main.urls')),
     # path('accounts/', include('django.contrib.auth.urls')),
     path('',views.home,name='home'),
+<<<<<<< HEAD
 
     path('carta',views.carta,name='carta'),
+=======
+    # path('buzon',views.buzon,name='buzon'),
+    # path('carta',views.carta,name='carta'),
+>>>>>>> a77b5d777e7bf2b608827958df88ac334517cce9
     path('galeria',views.galeria,name='galeria'),
     path('mapa',views.mapa,name='mapa'),
     path('mision',views.mision,name='mision'),
@@ -44,13 +57,20 @@ urlpatterns = [
     
     path('domicilios',views.domicilios,name='domicilios'),
      path('reservas',views.reservas,name='reservas'),
+    path('productos/',views.productos, name='productos'),
+    path('buzon/', views.buzon, name='buzon'),
+     
 
     
 
+<<<<<<< HEAD
     path('buzon/', views.buzon, name='buzon'),
     path('gracias/', views.gracias, name='gracias'),
 
     
 ]
 
+=======
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+>>>>>>> a77b5d777e7bf2b608827958df88ac334517cce9
 

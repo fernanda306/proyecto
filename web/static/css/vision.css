@@ -6,10 +6,10 @@
   margin-bottom: 10%;
   width: 450px;
   height: 400px;
-
   text-align: center;
   align-items: center;
-  background: linear-gradient(135deg, #61361a, #000000);
+  background-color: rgb(56, 57, 89);
+  /* background: linear-gradient(135deg, #61361a, #000000); */
   padding: 40px 60px;
   border-radius: 15px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);

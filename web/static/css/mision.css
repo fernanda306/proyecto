@@ -8,7 +8,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #61361a, #000000);
+  background-color: rgb(56, 57, 89);
+  /* background: linear-gradient(135deg, #c9ab25, #bfbc06); */
   padding: 40px 60px;
   border-radius: 15px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
@@ -17,7 +18,7 @@
 
 .title {
   font-size: 3rem;
-  color: #fff;
+  color: #ffffff; 
   margin-bottom: 20px;
   letter-spacing: 2px;
   text-align: center;
@@ -31,7 +32,7 @@
   hyphens: auto; /* Para separar palabras correctamente */
   word-break: break-word; /* Evita desbordamientos */
   max-width: 100%;
-  color: #fff;
+  color: #ffffff;
 }
 
 /* Animaciones */
