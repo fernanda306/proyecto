@@ -37,8 +37,7 @@ def carta(request):
 def galeria(request):
     return render (request, 'galeria.html')
 
-def mapa(request):
-    return render (request, 'mapa.html')
+
 
 def mision(request):
     return render (request, 'mision.html')
@@ -67,8 +66,6 @@ def registrarse(request):
 
     return render(request, 'registrarse.html')
 
-def vision(request):
-    return render (request, 'vision.html')
 
 
 def fotos(request):

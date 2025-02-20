@@ -10,7 +10,9 @@
 
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/login.css' %}">             
+<link rel="stylesheet" href="{% static 'css/login.css' %}">   
+
+
 <main>
     <form method="post"action="{% url 'login' %}">
         {% csrf_token %}
@@ -32,6 +34,37 @@
         </div>
     </form>
 </main>
+
+<main>
+    <form method="post" action="{% url 'registrarse' %}"> 
+        {% csrf_token %} 
+    <div> 
+        <h2>Registro</h2> 
+
+        {% if messages %}
+            <div class="messages"> 
+                {% for message in messages %}
+                    <p style="color: red;">{{ message }}</p> 
+                {% endfor %}
+            </div> 
+        {% endif %} 
+
+        <input type="text" name="username" placeholder="Nombre del Usuario" required> 
+        <input type="email" name="email" placeholder="Correo Electrónico" required> 
+        <input type="password" name="password" placeholder="Contraseña" required> 
+        <input type="password" name="confirm_password" placeholder="Confirmar Contraseña" required> 
+        <button type="submit">Registrarse</button> 
+        <p>¿Ya tienes una cuenta? <a href="{% url 'login' %}">Inicia sesión aquí</a></p> 
+    </div> 
+    </form>
+</main>
+
+
+
+
+
+
+
 {% endblock %}
 
 
