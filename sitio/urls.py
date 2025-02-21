@@ -45,10 +45,8 @@ urlpatterns = [
     # path('carta',views.carta,name='carta'),
 
     path('galeria',views.galeria,name='galeria'),
-    path('mapa',views.mapa,name='mapa'),
     path('mision',views.mision,name='mision'),
     path('registrarse',views.registrarse,name='registrarse'),
-    path('vision',views.vision,name='vision'),
     path('fotos',views.fotos,name='fotos'),
     path('videos',views.videos,name='videos'),
     path('login',views.login,name='login'),
