@@ -39,13 +39,15 @@ urlpatterns = [
     # path('accounts/', include('django.contrib.auth.urls')),
     path('',views.home,name='home'),
 
-    path('carta',views.carta,name='carta'),
+   
 
     # path('buzon',views.buzon,name='buzon'),
     # path('carta',views.carta,name='carta'),
 
     path('galeria',views.galeria,name='galeria'),
-    path('mision',views.mision,name='mision'),
+    
+    path('nosotros',views.nosotros,name='nosotros'),
+
     path('registrarse',views.registrarse,name='registrarse'),
     path('fotos',views.fotos,name='fotos'),
     path('videos',views.videos,name='videos'),

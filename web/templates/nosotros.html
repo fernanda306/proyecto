@@ -5,7 +5,7 @@
 {% block content %}
 
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/mision.css'%}">
+<link rel="stylesheet" href="{% static 'css/nosotros.css'%}">
 
 <!-- <div class="principal">
             <div class="container1">
@@ -69,7 +69,7 @@
     <form method="post" action="{% url 'registrarse' %}"> 
         {% csrf_token %} 
     <div> 
-        <h3>Buzon de sugerencias </h3> 
+        <!-- <h3>Buzon de sugerencias </h3>  -->
 
         {% if messages %}
             <div class="messages"> 

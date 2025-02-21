@@ -29,8 +29,6 @@ def buzon(request):
 
 
 
-def carta(request):
-    return render (request, 'carta.html')
 
 
 
@@ -39,8 +37,11 @@ def galeria(request):
 
 
 
-def mision(request):
-    return render (request, 'mision.html')
+def nosotros(request):
+    return render (request, 'nosotros.html')
+
+
+
 
 def registrarse(request): 
     if request.method == 'POST': 
