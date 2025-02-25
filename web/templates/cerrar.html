@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+
+{% block title %} inicio {%endblock%}
+{% block content %}
+
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/cerrar.css' %}">
+
+<form method="post" action="{% url 'cerrar' %}">
+    {% csrf_token %}
+    <button type="submit">Cerrar sesión</button>
+</form>
+
+{% endblock %}     

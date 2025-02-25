@@ -187,8 +187,8 @@ p a:hover {
 }
 
 .section img {
-  width: 150px;
-  height: 150px;
+  width: 300px;
+  height: 300px;
   object-fit: cover;
   border-radius: 10px;
   transition: transform 0.3s ease-in-out;
@@ -267,8 +267,8 @@ h2 {
 }
 
 .vision img {
-  width: 150px;
-  height: 150px;
+  width: 300px;
+  height: 300px;
   object-fit: cover;
   border-radius: 10px;
   transition: transform 0.3s ease-in-out;
@@ -279,7 +279,7 @@ h2 {
 }
 
 .text{
-  color: #fcfcfc;
+  color: #ffffff;
   flex: 1;
   padding: 0 20px;
   text-align: justify;

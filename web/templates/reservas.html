@@ -4,7 +4,31 @@
 
 {% block title %} inicio {%endblock%}
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/galeria.css' %}">
+<link rel="stylesheet" href="{% static 'css/reservas.css' %}">
+<h2>Hacer una Reserva</h2>
+<div class="container5">
+
+<form method="POST">
+  {% csrf_token %}
+  
+  <input type="text" name="username" placeholder="Nombre del Usuario" required> 
+  
+  <label for="fecha">Fecha:</label>
+  <input type="date" id="fecha" name="fecha" required>
+
+  <label for="hora">Hora:</label>
+  <input type="time" id="hora" name="hora" required>
+
+  <label for="num_personas">Número de Personas:</label>
+  <input type="number" id="num_personas" name="num_personas" min="1" max="20" required>
+
+  <label for="comentarios">Comentarios:</label>
+  <textarea id="comentarios" name="comentarios" rows="3"></textarea>
+
+  <button type="submit">Reservar</button>
+</form>
+
+</div>
 
 
 

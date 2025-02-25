@@ -18,16 +18,12 @@ from django.contrib import admin
 from django.urls import path
 from web import views
 from django.contrib.auth import views as auth_views
-
-from django.urls import path
-from django.urls import path, include
-
-from django.urls import path
+from django.urls import include
 
 from django.conf import settings
 from django.conf.urls.static import static
 
-
+from django.contrib.auth.views import LogoutView
 
 
 
@@ -39,33 +35,28 @@ urlpatterns = [
     # path('accounts/', include('django.contrib.auth.urls')),
     path('',views.home,name='home'),
 
-   
+
 
     # path('buzon',views.buzon,name='buzon'),
     # path('carta',views.carta,name='carta'),
 
     path('galeria',views.galeria,name='galeria'),
-    
     path('nosotros',views.nosotros,name='nosotros'),
-
     path('registrarse',views.registrarse,name='registrarse'),
     path('fotos',views.fotos,name='fotos'),
     path('videos',views.videos,name='videos'),
     path('login',views.login,name='login'),
-    
     path('domicilios',views.domicilios,name='domicilios'),
-     path('reservas',views.reservas,name='reservas'),
     path('productos/',views.productos, name='productos'),
-    path('buzon/', views.buzon, name='buzon'),
-     
-
-    
-
-
-    path('buzon/', views.buzon, name='buzon'),
+    path('sugerencia', views.sugerencia, name='sugerencia'),
     path('gracias/', views.gracias, name='gracias'),
+    path('cerrar', views.cerrar, name='cerrar'),
+     path('reservas', views.reservas, name='reservas'),
 
-    
+
+
+
+
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

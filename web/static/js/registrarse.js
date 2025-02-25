@@ -1,15 +1,11 @@
-const registerButton = document.querySelector("a[href*='registrarse']"),
-      loginButton = document.querySelector("a[href*='login']"),
-      formsContainer = document.querySelector("main");
+const container4 = document.querySelector('.container4');
+const register = document.querySelector('.register');
+const login = document.querySelector('.login');
 
-registerButton.addEventListener("click", (event) => {
-  event.preventDefault();
-  formsContainer.classList.remove("bounceRight");
-  formsContainer.classList.add("bounceLeft");
-});
+register.addEventListener('click', () => {
+    container4.classList.add('active');
+})
 
-loginButton.addEventListener("click", (event) => {
-  event.preventDefault();
-  formsContainer.classList.remove("bounceLeft");
-  formsContainer.classList.add("bounceRight");
-});
+login.addEventListener('click', () => {
+    container4.classList.remove('active');
+})

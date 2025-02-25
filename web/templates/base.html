@@ -28,28 +28,42 @@
                 <img src="{% static 'img/casa.png' %}" width="30px" height="30px">
             </label>
             <ul class="menu">
-             
+
+             <li class="dropdown">
+                    <a href="{% url 'nosotros'%}">nosotros</a>
+                <ul class="dropdown-menu">
+                    <li><a href="{% url 'sugerencia'%}">Buzon</a></li>
+                      
+                </ul>
+            </li>
+               
             
               
-                        
-                <li><a href="{% url 'nosotros'%}">nosotros</a></li>      
+                           
                 <li><a href="{% url 'productos'%}">carta</a></li>
                 <li><a href="{% url 'galeria'%}">Galeria</a></li>
 
+                <li><a href="{% url 'domicilios'%}">Servicios</a></li>
+                <li><a href="{% url 'reservas'%}">reservas</a></li>
+       
+
+
+                    
+        
+
 
                 <li class="dropdown">
-                    <a href="dropdown-toggle">Servicios</a>
+                    <a href="{% url 'login'%}"> <img src="{% static 'img/perfil.png' %}"  width="20px" height="20px"></a>
 
                     <ul class="dropdown-menu">
-                        <li><a href="{% url 'reservas'%}">Reservaciones</a></li>
-                        <li><a href="{% url 'domicilios'%}">domicilios</a></li>
+                        <li><a href="{% url 'cerrar'%}">cerrar sesión</a></li>
+                        <li><a href="{% url 'login'%}">domicilios</a></li>
                        
                       
 
                     </ul>
                 </li>
 
-                <li ><a href="{% url 'login'%}">  <img src="{% static 'img/perfil.png' %}"  width="20px" height="20px"></a></li>
                 <li ><a href="">  <img src="{% static 'img/carrito.png' %}"  width="20px" height="20px"></a></li>
             </ul>
         </nav>
@@ -93,7 +107,7 @@
                 <a href="https://www.instagram.com/casamiagarzon/"><img src="{% static 'img/instagram.png' %}"  alt="Instagram"></a>
                 <a href="https://www.facebook.com/search/top?q=casamia%20garzon"><img src="{% static 'img/facebook.png' %}" alt="Facebook"></a>
                 <a href="https://wa.me/message/DQ3EYIZCS24KM1" target="_blank"><img src="{% static 'img/whas.png' %}"></a>
-  
+        
             </div>
         </div>
     </footer>
