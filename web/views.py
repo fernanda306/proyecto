@@ -1,20 +1,23 @@
 from django.shortcuts import render
 
-from django.shortcuts import render, redirect 
-from django.contrib.auth.models import User 
-from django.contrib import messages 
+from django.core.mail import send_mail
+
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
+from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login
 from .models import Producto
 
+from django.contrib.auth import logout
+from django.shortcuts import redirect
 
-from django.core.mail import send_mail
-from django.shortcuts import render, redirect
-from django.conf import settings
+
 from .forms import SugerenciaForm
 
 
 
-from django.shortcuts import render
+
+
 
 
 # Create your views here.
@@ -43,25 +46,25 @@ def nosotros(request):
 
 
 
-def registrarse(request): 
-    if request.method == 'POST': 
-        username = request.POST['username'] 
-        email = request.POST['email'] 
-        password = request.POST['password'] 
-        confirm_password = request.POST.get('confirm_password') 
+def registrarse(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+        confirm_password = request.POST.get('confirm_password')
 
-        if password != confirm_password: 
-            messages.error(request, 'Las contraseñas no coinciden.') 
-        elif User.objects.filter(email=email).exists(): 
-            messages.error(request, 'El correo ya está registrado.') 
-        elif User.objects.filter(username=username).exists(): 
-            messages.error(request, 'El nombre de usuario ya está en uso.') 
-        else: 
-            user = User.objects.create_user(username=username, email= email, password=password) 
-            user = authenticate(request, username=username, password=password) 
-            if user is not None: 
-                auth_login(request, user) 
-                messages.success(request, "¡Registro exitoso!") 
+        if password != confirm_password:
+            messages.error(request, 'Las contraseñas no coinciden.')
+        elif User.objects.filter(email=email).exists():
+            messages.error(request, 'El correo ya está registrado.')
+        elif User.objects.filter(username=username).exists():
+            messages.error(request, 'El nombre de usuario ya está en uso.')
+        else:
+            user = User.objects.create_user(username=username, email= email, password=password)
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                auth_login(request, user)
+                messages.success(request, "¡Registro exitoso!")
                 return redirect('login')
 
 
@@ -100,10 +103,10 @@ def login(request):
             return redirect('home')
         else:
             messages.error(request, "Contraseña incorrecta.")
-    
+
     return render(request, 'login.html')
 
-            
+
 
 def reservas(request):
     return render (request, 'reservas.html')
@@ -125,20 +128,38 @@ def productos(request):
 
 
 
-def buzon(request):
+def cerrar(request):
+    return render (request,'cerrar.html')
+
+
+
+
+def sugerencia(request):
     if request.method == 'POST':
         form = SugerenciaForm(request.POST)
         if form.is_valid():
-            sugerencia = form.cleaned_data['sugerencia']
-            email = form.cleaned_data.get('email', 'usuario_anonimo@example.com')
-            send_mail(
-                subject='Nueva Sugerencia',
-                message=f'Sugerencia de {email}:\n\n{sugerencia}',
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[settings.ADMIN_EMAIL],
-            )
-            return redirect('gracias')
+            form.save()
+            # send_mail(
+            #      'Nueva Sugerencia Recibida',
+            #      f"Nombre: {sugerencia.username}\n"
+            #      f"Correo: {sugerencia.email}\n"
+            #      f"Sugerencia:\n{sugerencia.section_text}",
+            #      'fernandamanriquefernandez724@gmail.com',  # Correo del remitente
+            #      ['fernandamanriquefernandez724@gmail.com'],  # Correo del destinatario
+            #     fail_silently=False,
+            #  )
+            messages.success(request,"Tu sugerencia ha sido enviada con éxito.")
+            return redirect('sugerencia') 
+
     else:
         form = SugerenciaForm()
-    return render(request, 'buzon.html', {'form': form})
+
+    return render(request, 'sugerencia.html', {'form': form})  # ✅ Asegurar el nombre correcto
+
+
+
+
+
+
+
 

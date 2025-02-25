@@ -158,9 +158,10 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.tudominio.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'tuemail@tudominio.com'
-EMAIL_HOST_PASSWORD = 'tucontraseña'
+EMAIL_HOST_USER = 'fernandamanriquefernandez724@gmail.com'
+EMAIL_HOST_PASSWORD = 'z t i q g i l y f l b q e z j w'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 ADMIN_EMAIL = 'admin@tudominio.com'
 
 
+cerrar_REDIRECT_URL = 'login'

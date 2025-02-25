@@ -29,7 +29,7 @@ img {
   grid-template-columns: 45% 50%;
   place-items: center;
   gap: 50px;
-  background: rgb(67, 69, 112);
+  background:  rgb(67, 69, 112);
   background-color: rgba(35, 36, 57, 1);
   overflow: hidden;
   padding: 50px 80px;
@@ -159,7 +159,7 @@ input[type="email"]:focus {
 
 .item:nth-child(1) {
   /* background-color: #ffffff; */
-  border-radius: 70% 70% 4 70%;
+  border-radius: 50% 50% 0 50%;
 }
 
 .item:nth-child(2) {
