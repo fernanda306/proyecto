@@ -3,7 +3,7 @@
   height: 4px;
   display: flex; /* Esto es necesario para que justify-content funcione */
   justify-content: center;
-  background-color: #61361a ;
+  background-color: #37ff3a ;
 }
 
 /* Estilo de navegación */
