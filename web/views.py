@@ -41,8 +41,6 @@ def home(request):
 
 
 
-
-
 def galeria(request):
     return render (request, 'galeria.html')
 
