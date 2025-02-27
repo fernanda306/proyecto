@@ -16,47 +16,38 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from web import views
+from web import views 
 from django.contrib.auth import views as auth_views
-from django.urls import include
-
 from django.conf import settings
 from django.conf.urls.static import static
 
-from django.contrib.auth.views import LogoutView
-
-
-
-
 urlpatterns = [
-
     path('admin/', admin.site.urls),
-    # path('', include('main.urls')),
-    # path('accounts/', include('django.contrib.auth.urls')),
-    path('',views.home,name='home'),
-
-
-
-    # path('buzon',views.buzon,name='buzon'),
-    # path('carta',views.carta,name='carta'),
-
-    path('galeria',views.galeria,name='galeria'),
-    path('nosotros',views.nosotros,name='nosotros'),
-    path('registrarse',views.registrarse,name='registrarse'),
-    path('fotos',views.fotos,name='fotos'),
-    path('videos',views.videos,name='videos'),
-    path('login',views.login,name='login'),
-    path('domicilios',views.domicilios,name='domicilios'),
-    path('productos/',views.productos, name='productos'),
-    path('sugerencia', views.sugerencia, name='sugerencia'),
+    path('', views.home, name='home'),
+    path('galeria', views.galeria, name='galeria'),
+    path('nosotros', views.nosotros, name='nosotros'),
+    path('registrarse', views.registrarse, name='registrarse'),
+    path('fotos', views.fotos, name='fotos'),
+    path('videos', views.videos, name='videos'),
+    path('login', views.login, name='login'),
+    path('domicilios', views.domicilios, name='domicilios'),
+    path('productos/', views.productos, name='productos'),
+    path('sugerencia', views.sugerencias, name='sugerencia'),
     path('gracias/', views.gracias, name='gracias'),
-    path('cerrar', views.cerrar, name='cerrar'),
-     path('reservas', views.reservas, name='reservas'),
+    path('reserva/', views.reserva, name='reserva'),
+    path('logout/', views.cerrar_sesion, name='logout'),
+
+    path('resetear/', views.resetear, name='resetear'),
+    path("cambiar/<uidb64>/<token>/", views.cambiar, name="cambiar"),
+    path("cambiada", views.cambiada, name="cambiada"),
+
+
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
 
 
 
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 
 

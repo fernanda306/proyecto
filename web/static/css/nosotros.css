@@ -314,3 +314,62 @@ h2 {
 }
 
 
+
+
+
+
+
+
+/* Media Queries para 800px */
+@media screen and (max-width: 800px) {
+  .principal {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .container1 {
+    width: 90%;
+    padding: 30px;
+  }
+
+  .container2, .container3 {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .section, .vision {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .section img, .vision img {
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 15px;
+  }
+}
+
+/* Media Queries para 600px */
+@media screen and (max-width: 600px) {
+  .container1 {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+
+  .container2, .container3 {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .section-text, .text {
+    padding: 0;
+  }
+}

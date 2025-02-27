@@ -1,23 +1,14 @@
 {% extends 'base.html' %}
 
-
-{% block title %} inicio {%endblock%}
-
+{% block title %} inicio {% endblock %}
 
 {% load static %}
 
-
-
-
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/login.css' %}">   
-
-<div class="container4">
-
- 
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
 
 <main>
-    <form method="post"action="{% url 'login' %}" class="form-box">
+    <form method="post" action="{% url 'login' %}" class="form-box">
         {% csrf_token %}
         <div>
             <h2>Inicio de sesión</h2>
@@ -25,75 +16,21 @@
             {% if messages %}
                 <div class="messages">
                     {% for message in messages %}
-                        <div class="{{message.tags }}">{{ message }}</div> 
+                        <div class="{{ message.tags }}">{{ message }}</div>
                     {% endfor %}
-                </div> 
-            {% endif %} 
+                </div>
+            {% endif %}
 
-                <input type="text" name="username" placeholder="Usuario" required> 
-                <input type="password" name="password" placeholder="Contraseña" required> 
-                <button type="submit">Ingresar</button> 
-              
+            <input type="text" name="username" placeholder="Usuario" required>
+            <input type="password" name="password" placeholder="Contraseña" required>
+            <button type="submit">Ingresar</button>
+            <a class="boton"  href="{% url 'resetear' %}">Olvido su contraseña</a>
+            <p>¿No tienes cuenta? <a href="{% url 'registrarse' %}">Regístrate aquí</a></p>
         </div>
     </form>
-
-     <!-- </main>
-
-
-    <main>  -->
-
-    <form method="post" action="{% url 'registrarse' %}" class="form-box"> 
-        {% csrf_token %} 
-    <div> 
-        <h2>Registro</h2> 
-
-        {% if messages %}
-            <div class="messages"> 
-                {% for message in messages %}
-                    <p style="color: red;">{{ message }}</p> 
-                {% endfor %}
-            </div> 
-        {% endif %} 
-
-        <input type="text" name="username" placeholder="Nombre del Usuario" required> 
-        <input type="email" name="email" placeholder="Correo Electrónico" required> 
-        <input type="password" name="password" placeholder="Contraseña" required> 
-        <input type="password" name="confirm_password" placeholder="Confirmar Contraseña" required> 
-        <button type="submit" >Registrarse</button> 
-       
-    </div> 
-    </form>
 </main>
- 
-  <!-- <div class="toggle-box">
 
-   
-
-    <div class="toggle-panel toggle-left">
-        <h1>Hola, Bienvenidos!</h1>
-        <p>No tienes cuenta aun?</p>
-        <button class="btn register-btn">Registrarse</button>
-    </div>
-
-    <div class="toggle-panel toggle-right">
-        <h1>Bienvenid@!</h1>
-        <p>ya tienes cuenta inici sesión?</p>
-        <button class="btn login-btn">Incia Sesión</button>
-    </div>  
-
-
-   
-</div>
-</div> -->
-
-</div>
-
-
-
-
-<script src=" {% static 'js/registrarse.js'%}"></script> 
-
-
+<script src="{% static 'js/login.js' %}"></script>
 
 {% endblock %}
 

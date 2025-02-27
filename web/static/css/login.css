@@ -1,61 +1,30 @@
 
-.container4{
-
-
-        
-        right: 0;
-        width: 50%;
-        height: 100%;
-        background: #ffffff;
-        display: flex;
-        align-items: center;
-        color: #333;
-        text-align: center;
-        padding: 40px;
-        z-index: 1;
-        transition: .6s ease-in-out 1.2s, visibility 0s 1s;
-        margin-bottom: 10%;
-    
-
-}
 
 main {
-
- 
-
-
-
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    background: #ffffff;
+    text-align: center;
+    background:  rgb(168, 172, 252)1;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    margin-bottom: 20px;
-    text-align: center;
+    box-shadow: 0 0 10px  white; 
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
 
 h2 {
-    font-size: 24px;
-    margin-bottom: 15px;
-    color: #000000;
-}
-
-.messages {
-    margin-bottom: 15px;
-}
-
-.messages div {
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 14px;
+    margin-bottom: 20px;
+    color: #ffffff;
 }
 
 input {
     width: 100%;
-    padding: 12px;
-    margin-bottom: 10px;
+    padding: 10px;
+    margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
@@ -63,36 +32,61 @@ input {
 
 button {
     width: 100%;
-    padding: 12px;
-    background: #3c1a5f;
+    padding: 10px;
+    background: #825bbf;
+    color: white;
     border: none;
     border-radius: 5px;
-    color: white;
-    font-size: 16px;
     cursor: pointer;
-    transition: 0.3s;
+    font-size: 16px;
+    margin-top: 10px;
+    margin-bottom: 4%;
 }
 
 button:hover {
-    background: #9e39b7;
+    background: #9f8dd1;
 }
 
-@media screen and (max-width: 500px) {
-    main {
-        width: 90%;
-    }
+.messages p {
+    background: #ffdddd;
+    color: #fcfcfc;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+p{
+    margin-top: 3%;
+   
+    
 }
 
 
-input::placeholder{
-    color: #888;
-    font-weight: 400;
+.boton {
+   color: #fcfcfc;
+   list-style: none;
+}	
+
+p a {
+    margin-top: 2%;
+    color: #fff9ec;
+    text-decoration: none;
+}
+
+p a:hover {
+    text-decoration: underline;
+
 }
 
 
-.form-box{ width: 100%; }
+.mensaje {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
 
+.fade-in {
+    opacity: 1;
+}
 
- 
-
-
+.fade-out {
+    opacity: 0;
+}

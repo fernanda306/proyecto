@@ -5,6 +5,7 @@ from .models import Producto
 
 
 
+
 # Register your models here.
 # class  productoAdmin(admin.ModelAdmin):
 #     model = producto
@@ -22,4 +23,9 @@ class ProductoAdmin(admin.ModelAdmin):
         return "Sin imagen"
     
     mostrar_imagen.short_description = "Imagen"
+
+
+
+
+
 

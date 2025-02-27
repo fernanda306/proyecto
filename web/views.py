@@ -1,33 +1,41 @@
-from django.shortcuts import render
-
-from django.core.mail import send_mail
-
+import logging
 from django.shortcuts import render, redirect
+from django.core.mail import send_mail
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login
-from .models import Producto
-
-from django.contrib.auth import logout
-from django.shortcuts import redirect
-
 
 from .forms import SugerenciaForm
+from .models import Producto
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
+
+
+from django.shortcuts import render, redirect
+
+from .forms import ReservaForm
+
+
+
+from django.contrib.auth.models import User 
+from django.contrib.auth.tokens import default_token_generator 
+from django.core.mail import send_mail
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode 
+from django.utils.encoding import force_bytes, force_str
 
 
 
 
 
 
+
+logger = logging.getLogger(__name__)
 
 # Create your views here.
 def home(request):
     return render (request, 'home.html')
 
 
-
-def buzon(request):
-    return render (request,'buzon.html')
 
 
 
@@ -108,8 +116,7 @@ def login(request):
 
 
 
-def reservas(request):
-    return render (request, 'reservas.html')
+
 
 def domicilios(request):
     return render (request, 'domicilios.html')
@@ -121,40 +128,129 @@ def gracias(request):
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+def sugerencias (request):
+    if request.method == 'POST':
+        form = SugerenciaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            form.send_mail()
+            return redirect('sugerencia')
+    else:
+        form = SugerenciaForm()
+
+    return render(request, 'sugerencia.html', {'form': form})
+
+
+
+
+
+
+
+def reserva(request):
+    if request.method == 'POST':
+        form = ReservaForm(request.POST)
+        if form.is_valid():
+    
+            return redirect('reserva')  # Reemplaza con la URL deseada
+    else:
+        form = ReservaForm()
+    return render(request, 'reserva.html', {'form': form})
+
+
+
+
 def productos(request):
     productos = Producto.objects.all()  # Obtiene todos los productos
     return render(request, 'productos.html', {'productos': productos})
 
 
 
+def cerrar_sesion(request):
+    logout(request)
+    # messages.success(request, "¡Hasta luego!")
 
-def cerrar(request):
-    return render (request,'cerrar.html')
+    return redirect('home')
 
 
 
 
-def sugerencia(request):
+def resetear(request):
     if request.method == 'POST':
-        form = SugerenciaForm(request.POST)
-        if form.is_valid():
-            form.save()
-            # send_mail(
-            #      'Nueva Sugerencia Recibida',
-            #      f"Nombre: {sugerencia.username}\n"
-            #      f"Correo: {sugerencia.email}\n"
-            #      f"Sugerencia:\n{sugerencia.section_text}",
-            #      'fernandamanriquefernandez724@gmail.com',  # Correo del remitente
-            #      ['fernandamanriquefernandez724@gmail.com'],  # Correo del destinatario
-            #     fail_silently=False,
-            #  )
-            messages.success(request,"Tu sugerencia ha sido enviada con éxito.")
-            return redirect('sugerencia') 
+        email = request.POST['email']
+        user= User.objects.filter(email=email).first()
+        if user:
+            token = default_token_generator.make_token(user)
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+            enlace = request.build_absolute_uri(f"cambiar/{uid}/{token}/")
+            send_mail(
+               "restablecimiento de contraseña",
+               f"Da clic en el siguiente enlace para restablecer tu contraseña: {enlace}",
+               "fernandamanriquefernandez724@gmail.com",
+               [email],
+               fail_silently=False,
+            )
 
-    else:
-        form = SugerenciaForm()
+            messages.error(request, "Se ha enviado un enlace de restablecimiento a su correo.")
+            return redirect('resetear')
+        else:
+            messages.error(request, "No se encontró un usuario con ese correo.")
+            return redirect('resetear')
+    return render(request, 'resetear.html')
 
-    return render(request, 'sugerencia.html', {'form': form})  # ✅ Asegurar el nombre correcto
+
+
+
+
+def cambiar(request, uidb64, token):
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+
+
+        if user and default_token_generator.check_token(user, token):
+            if request.method == "POST":
+                nueva_contraseña = request.POST['password']
+                user.set_password(nueva_contraseña)
+                user.save()
+                return redirect('password_changed')
+            
+            return render(request, 'cambiar.html') # pagina para cambiar contraseña
+        
+        return redirect("login")
+    
+
+def cambiada(request):
+        return render (request, 'cambiada.html')
+
+    
+
+            
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

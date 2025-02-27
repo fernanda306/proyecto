@@ -29,46 +29,50 @@
             </label>
             <ul class="menu">
 
-             <li class="dropdown">
+                <li class="dropdown">
                     <a href="{% url 'nosotros'%}">nosotros</a>
-                <ul class="dropdown-menu">
-                    <li><a href="{% url 'sugerencia'%}">Buzon</a></li>
+                    <ul class="dropdown-menu">
+                        <li><a href="{% url 'sugerencia'%}">Buzon de sugerencias</a></li>
                       
-                </ul>
-            </li>
+                    </ul>
+                </li>
                
-            
-              
-                           
-                <li><a href="{% url 'productos'%}">carta</a></li>
+                    
+                <li><a href="{% url 'productos'%}">Carta</a></li>
                 <li><a href="{% url 'galeria'%}">Galeria</a></li>
 
                 <li><a href="{% url 'domicilios'%}">Servicios</a></li>
-                <li><a href="{% url 'reservas'%}">reservas</a></li>
+                <li><a href="{% url 'reserva'%}">Reservas</a></li>
        
 
 
+                {% if not user.is_authenticated %}
+                
+                <li><a href="{% url 'login'%}"><img src="{% static 'img/sesion.png'%}" width="20px" height="20px"></a></li>
+
+                {% endif %}
+            
                     
-        
+                {% if user.is_authenticated %}
 
 
-                <li class="dropdown">
-                    <a href="{% url 'login'%}"> <img src="{% static 'img/perfil.png' %}"  width="20px" height="20px"></a>
-
-                    <ul class="dropdown-menu">
-                        <li><a href="{% url 'cerrar'%}">cerrar sesión</a></li>
-                        <li><a href="{% url 'login'%}">domicilios</a></li>
-                       
-                      
-
-                    </ul>
-                </li>
-
+                <li><a href="{% url 'login'%}"><img src="{% static 'img/perfil.png'%}" width="20px" height="20px"></a></li>
+                  
                 <li ><a href="">  <img src="{% static 'img/carrito.png' %}"  width="20px" height="20px"></a></li>
+
+              
             </ul>
-        </nav>
+
+            <a href="{% url 'logout' %}"><img src="{% static 'img/cerrar.png' %}"  width="20px" height="20px"></a>
+
+            {% endif %}
+
+
+              <!-- Otros enlaces de navegación -->
+            
 
         
+
 
 
     </header>
