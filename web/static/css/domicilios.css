@@ -1,114 +1,189 @@
 
-h2 .titulo{
-    text-align: center;
-}
-
+/* Estilos base para el menú */
 .menu-container {
-    width: 60%;
-    margin: auto;
-
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.titulo {
+    width: 70%;
+    margin: 30px auto;
+    padding: 25px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background-color: #f9f9f9;
+  }
+  
+  h2.titulo {
+    text-align: center;
     background-color: rgb(221, 187, 51);
     color: white;
+    padding: 12px 25px;
+    font-size: 26px;
+    margin: 0 auto 30px;
     display: inline-block;
-    padding: 10px 20px;
-    font-size: 24px;
-}
-
-.opcion {
+    border-radius: 6px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .opcion {
     display: flex;
     align-items: center;
-    margin: 20px 0;
+    margin: 25px 0;
     background: #fff;
-    padding: 15px;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+  }
+  
+  .opcion:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .opcion img {
+    width: 250px;
+    height: 180px;
+    object-fit: cover;
     border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.opcion img {
-    width: 200px;
-    height: auto;
-    border-radius: 10px;
-    margin-right: 20px;
-}
-
-.descripcion {
-    text-align: left;
-}
-
-h3 {
-    font-size: 20px;
-    margin: 0;
-}
-
-h3 span {
+    margin-right: 25px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .descripcion {
+    flex: 1;
+  }
+  
+  .descripcion h3 {
+    font-size: 22px;
+    margin: 0 0 15px 0;
+    color: #333;
+  }
+  
+  .descripcion h3 span {
     color: #d33;
     font-weight: bold;
-}
-
-p {
-    font-size: 14px;
-    color: #555;
-}
-
-.ordenar {
-    text-align: center;
-    background: green;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
+  }
+  
+  .descripcion p {
     font-size: 16px;
-    border-radius: 5px;
-}
-
-.ordenar:hover {
-    background: darkgreen;
-}
-
-
-/* Centrar el contenido dentro del pie de página */
-footer.uno {
-    text-align: center;
-    background-color: #333;
-    padding: 20px 0; 
-}
-
-/* Establecer el color del texto a blanco */
-footer .letra {
-    color: white;
-    font-size: 18px; }
-
-/* Estilo para la lista y los iconos sociales */
-footer .social ul {
-    list-style-type: none; 
-    padding: 0;
-}
-
-footer .social ul li {
+    color: #555;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+  
+  .descripcion a {
     display: inline-block;
-    margin: 0 10px; 
-}
-
-
-footer .social a img {
-    width: 3px;
-    height: 3px;
-    transition: transform 0.3s ease;
-}
-
-footer .social a:hover img {
-    transform: scale(1.1); 
-}
-
-.link a{
-    
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
     text-decoration: none;
-    width: 20px;
-    height: 20px;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: background-color 0.3s;
+  }
+  
+  .descripcion a:hover {
+    background-color: #388E3C;
+  }
+  
+  .link img {
+    width: 40px !important;
+    height: 40px !important;
+    margin: 0;
+    vertical-align: middle;
+  }
+  
+  /* Media query para pantallas de hasta 800px */
+  @media screen and (max-width: 800px) {
+    .menu-container {
+      width: 85%;
+      padding: 20px;
+    }
+    
+    h2.titulo {
+      font-size: 22px;
+      padding: 10px 20px;
+    }
+    
+    .opcion {
+      padding: 15px;
+      margin: 20px 0;
+    }
+    
+    .opcion img {
+      width: 180px;
+      height: 140px;
+      margin-right: 20px;
+    }
+    
+    .descripcion h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    
+    .descripcion p {
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+    
+    .descripcion a {
+      padding: 8px 16px;
+      font-size: 14px;
+    }
+  }
+  
+  /* Media query para pantallas de hasta 600px */
+  @media screen and (max-width: 600px) {
+    .menu-container {
+      width: 92%;
+      padding: 15px;
+    }
+    
+    h2.titulo {
+      font-size: 20px;
+      padding: 8px 16px;
+      display: block;
+      text-align: center;
+    }
+    
+    .opcion {
+      flex-direction: column;
+      padding: 15px;
+      margin: 15px 0;
+    }
+    
+    .opcion img {
+      width: 100%;
+      height: auto;
+      margin-right: 0;
+      margin-bottom: 15px;
+    }
+    
+    .descripcion {
+      width: 100%;
+      text-align: center;
+    }
+    
+    .descripcion h3 {
+      font-size: 18px;
+    }
+    
+    .descripcion p {
+      font-size: 14px;
+    }
+    
+    .descripcion a {
+      display: block;
+      margin: 0 auto;
+      width: 80%;
+    }
+    
+    .link img {
+      width: 30px !important;
+      height: 30px !important;
+    }
+  }
 
+
+
+.was img{
+    width: 10px;
+    height: 10px;
 }

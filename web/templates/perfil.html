@@ -28,8 +28,8 @@
             <div class="detail-item">
                 <h3>Estado de la cuenta</h3>
                 <p><strong>Cuenta activa:</strong> {% if is_active %}Sí{% else %}No{% endif %}</p>
-                <p><strong>Fecha de registro:</strong> {{ date_joined|date:"d/m/Y H:i" }}</p>
-                <p><strong>Último acceso:</strong> {{ last_login|date:"d/m/Y H:i" }}</p>
+                <p><strong>Fecha de registro:</strong> {{ date_joined }}</p>
+                <p><strong>Último acceso:</strong> {{ last_login}}</p>
             </div>
             
             {% if groups.exists %}
