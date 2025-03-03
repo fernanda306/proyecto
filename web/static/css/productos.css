@@ -139,3 +139,31 @@ p {
     outline: none;
     box-shadow: 0 0 5px rgba(169, 56, 234, 0.8);
 }
+
+
+
+
+
+
+.filter-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+  }
+  
+  .filter-btn {
+    background-color: #444;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .filter-btn:hover, .filter-btn.active {
+    background-color: #ff6b00;
+  }
+  

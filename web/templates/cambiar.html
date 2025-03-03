@@ -13,13 +13,13 @@
  
 <div class="container">
 
-<form action="POST">
-    <h2>ingresa tu nueva contraseña</h2>
-   
-    {% csrf_token %}
-    <input type="password" name="password" placeholder="Nueva contraseña" required>
-    <button type="submit">Guardar</button>
-</form>
+    <form method="POST">
+        <h2>ingresa tu nueva contraseña</h2>
+    
+        {% csrf_token %}
+        <input type="password" name="password" placeholder="Nueva contraseña" required>
+        <button type="submit">Guardar</button>
+    </form>
 
 </div>
 

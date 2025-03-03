@@ -1,0 +1,26 @@
+
+<!-- reservacion_exitosa.html -->
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/exitosa.css'%}">
+
+
+<div class="container ">
+    <div class="container2">
+        <div class="container3">
+            <div class="tarjeta">
+                <div class="carta">
+                    <h1>¡Reservación Confirmada!</h1>
+                    <p >Tu reservación ha sido registrada con éxito. Te esperamos en la fecha y hora indicada.</p>
+                    <p>Recibirás un correo electrónico con los detalles de tu reservación.</p>
+                    <a href="{% url 'home' %}">Volver al inicio</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

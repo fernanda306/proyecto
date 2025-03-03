@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+
+
+{% block title %} inicio {%endblock%}
+{% block content %}
+
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/reserva.css'%}">
+
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0">Realiza tu Reservación</h2>
+                </div>
+                <div class="card-body">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    
+                    <form method="POST">
+                        {% csrf_token %}
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.nombre.id_for_label }}" class="form-label">Nombre completo:</label>
+                            {{ form.nombre }}
+                            {% if form.nombre.errors %}
+                                <div class="text-danger">{{ form.nombre.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="{{ form.fecha.id_for_label }}" class="form-label">Fecha:</label>
+                                {{ form.fecha }}
+                                {% if form.fecha.errors %}
+                                    <div class="text-danger">{{ form.fecha.errors }}</div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <label for="{{ form.hora.id_for_label }}" class="form-label">Hora:</label>
+                                {{ form.hora }}
+                                {% if form.hora.errors %}
+                                    <div class="text-danger">{{ form.hora.errors }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.num_personas.id_for_label }}" class="form-label">Número de personas:</label>
+                            {{ form.num_personas }}
+                            {% if form.num_personas.errors %}
+                                <div class="text-danger">{{ form.num_personas.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.mensaje.id_for_label }}" class="form-label">Mensaje adicional (opcional):</label>
+                            {{ form.mensaje }}
+                            {% if form.mensaje.errors %}
+                                <div class="text-danger">{{ form.mensaje.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Confirmar Reservación</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

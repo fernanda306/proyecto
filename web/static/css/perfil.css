@@ -1,0 +1,107 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container5 {
+    width: 50%;
+    margin: 50px auto;
+    background: #ffffff;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.tres {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.cuatro {
+    color: #333;
+}
+
+.cinco > div {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.veinte {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: #007bff;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.veinte:hover {
+    background: #0056b3;
+}
+
+/* Sección de reservaciones */
+.ventiunio {
+    width: 60%;
+    margin: 30px auto;
+    background: #ffffff;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.ventidos h3 {
+    text-align: center;
+    color: #444;
+}
+
+.tabla {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.tablados {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.tablados th, .tablados td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.tablados th {
+    background: #007bff;
+    color: white;
+}
+
+.venticuatro {
+    color: green;
+    font-weight: bold;
+}
+
+.venticinco {
+    color: red;
+    font-weight: bold;
+}
+
+.ventiseis {
+    text-align: center;
+    color: #777;
+}
+
+
+.dieciocho {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}

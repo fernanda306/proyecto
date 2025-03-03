@@ -4,27 +4,25 @@ from django.core.mail import send_mail
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login
-
 from .forms import SugerenciaForm
-from .models import Producto
+from .models import Producto, Reservacion
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-
-
 from django.shortcuts import render, redirect
-
-from .forms import ReservaForm
-
-
-
 from django.contrib.auth.models import User 
 from django.contrib.auth.tokens import default_token_generator 
 from django.core.mail import send_mail
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode 
 from django.utils.encoding import force_bytes, force_str
+from django.urls import reverse
+from django.urls import path
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .forms import ReservacionForm
 
 
-
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -125,19 +123,6 @@ def gracias(request):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 def sugerencias (request):
     if request.method == 'POST':
         form = SugerenciaForm(request.POST)
@@ -154,17 +139,21 @@ def sugerencias (request):
 
 
 
-
-
-def reserva(request):
+def reservacion(request):
     if request.method == 'POST':
-        form = ReservaForm(request.POST)
+        form = ReservacionForm(request.POST)
         if form.is_valid():
-    
-            return redirect('reserva')  # Reemplaza con la URL deseada
+            form.save()
+            form.send_mail()
+            return redirect('reservacion_exitosa')
     else:
-        form = ReservaForm()
-    return render(request, 'reserva.html', {'form': form})
+        form = ReservacionForm()
+    
+    return render(request, 'reservacion.html', {'form': form})
+
+def reservacion_exitosa(request):
+    return render(request, 'reservacion_exitosa.html')
+
 
 
 
@@ -184,14 +173,17 @@ def cerrar_sesion(request):
 
 
 
+
+
+# Añade estas nuevas vistas
 def resetear(request):
     if request.method == 'POST':
         email = request.POST['email']
-        user= User.objects.filter(email=email).first()
+        user = User.objects.filter(email=email).first()
         if user:
             token = default_token_generator.make_token(user)
             uid = urlsafe_base64_encode(force_bytes(user.pk))
-            enlace = request.build_absolute_uri(f"cambiar/{uid}/{token}/")
+            enlace = request.build_absolute_uri(reverse("cambiar", kwargs={'uidb64': uid, 'token': token}))
             send_mail(
                "restablecimiento de contraseña",
                f"Da clic en el siguiente enlace para restablecer tu contraseña: {enlace}",
@@ -199,7 +191,6 @@ def resetear(request):
                [email],
                fail_silently=False,
             )
-
             messages.error(request, "Se ha enviado un enlace de restablecimiento a su correo.")
             return redirect('resetear')
         else:
@@ -207,44 +198,99 @@ def resetear(request):
             return redirect('resetear')
     return render(request, 'resetear.html')
 
-
-
-
-
 def cambiar(request, uidb64, token):
     try:
         uid = force_str(urlsafe_base64_decode(uidb64))
         user = User.objects.get(pk=uid)
-    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
-        user = None
-
-
-        if user and default_token_generator.check_token(user, token):
+        
+        if user is not None and default_token_generator.check_token(user, token):
             if request.method == "POST":
                 nueva_contraseña = request.POST['password']
                 user.set_password(nueva_contraseña)
                 user.save()
-                return redirect('password_changed')
+                return redirect('cambiada')
             
-            return render(request, 'cambiar.html') # pagina para cambiar contraseña
-        
+            return render(request, 'cambiar.html')
+        else:
+            return redirect("login")
+            
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
         return redirect("login")
-    
 
 def cambiada(request):
-        return render (request, 'cambiada.html')
+    return render(request, 'cambiada.html')
 
+
+
+
+
+        
+
+
+
+
+
+@login_required  # Asegura que solo usuarios conectados puedan ver esta página
+def perfil(request):
+    # El usuario actual está disponible como request.user
+    usuario = request.user
     
-
-            
-
-
-
-
-
-
+    # Puedes añadir más contexto si lo necesitas
+    context = {
+        'usuario': usuario
+    }
+    
+    return render(request, 'perfil.html', context)
 
 
+@login_required
+def perfil(request):
+    usuario = request.user
+    
+    # Acceder al perfil extendido (asumiendo que tienes un modelo Profile relacionado)
+    try:
+        perfil = usuario.profile  # o el nombre que hayas dado a la relación
+    except:
+        perfil = None
+    
+    context = {
+        'usuario': usuario,
+        'perfil': perfil
+    }
+    
+    return render(request, 'perfil.html', context)
+
+
+
+@login_required
+def perfil(request):
+    usuario = request.user
+    
+    # Obtener reservaciones de este usuario (suponiendo que tienes un campo usuario en el modelo Reservacion)
+    reservaciones = Reservacion.objects.filter(nombre=usuario.username).order_by('-fecha')
+    
+    context = {
+        'usuario': usuario,
+        'reservaciones': reservaciones
+    }
+    
+    return render(request, 'perfil.html', context)
+
+
+from datetime import date
+
+@login_required
+def perfil(request):
+    usuario = request.user
+    reservaciones = Reservacion.objects.filter(nombre=usuario.username).order_by('-fecha')
+    
+    context = {
+        'usuario': usuario,
+        'reservaciones': reservaciones,
+        'today': date.today()
+    }
+    
+    return render(request, 'perfil.html', context)
 
 
 
