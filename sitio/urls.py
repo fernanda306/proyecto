@@ -24,6 +24,10 @@ from django.urls import path
 from web import views
 from django.urls import path
 
+# from django.urls import path  # This line is already imported above
+# from .views import views  # This line is incorrect and should be removed
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
@@ -37,21 +41,17 @@ urlpatterns = [
     path('productos/', views.productos, name='productos'),
     path('sugerencia', views.sugerencias, name='sugerencia'),
     path('gracias/', views.gracias, name='gracias'),
-    path('reserva/', views.reserva, name='reserva'),
     path('logout/', views.cerrar_sesion, name='logout'),
 
     path('resetear/', views.resetear, name='resetear'),
     path("cambiar/<uidb64>/<token>/", views.cambiar, name="cambiar"),
     path("cambiada", views.cambiada, name="cambiada"),
-    path("carrito/", views.ver_carrito, name=" ver_carrito"),
+    path("carrito/", views.ver_carrito, name="ver_carrito"),
     path('carrito/actualizar/<int:item_id>/', views.actualizar_carrito, name='actualizar_carrito'),
     path('carrito/eliminar/<int:item_id>/', views.eliminar_item, name='eliminar_item'),
     path('carrito/agregar/<int:producto_id>/', views.agregar_item, name='agregar_item'),
-    path('carrito/agregar/<int:producto_id>/', views.agregar_item, name='agregar_item'),
-    path('carrito/', views.ver_carrito, name='carrito')
-
-
+    path('carrito/', views.ver_carrito, name='carrito'),
+    path('perfil/', views.perfil, name='perfil'),
+    path('reservacion/', views.reservacion, name='reservacion'),
+    path('reservacion/exitosa/', views.reservacion_exitosa, name='reservacion_exitosa'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-
-

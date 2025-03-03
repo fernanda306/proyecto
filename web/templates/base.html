@@ -42,7 +42,7 @@
                 <li><a href="{% url 'galeria'%}">Galeria</a></li>
 
                 <li><a href="{% url 'domicilios'%}">Servicios</a></li>
-                <li><a href="{% url 'reserva'%}">Reservas</a></li>
+                <!-- <li><a href="{% url 'reservacion'%}">Reservas</a></li> -->
        
 
 
@@ -56,6 +56,7 @@
                 {% if user.is_authenticated %}
 
 
+<<<<<<< HEAD
                     <li><a href="{% url 'login'%}"><img src="{% static 'img/perfil.png'%}" width="20px" height="20px"></a></li>
                     <li><a href="{% url 'carrito' %}"><img src="{% static 'img/carrito.png' %}" width="20px" height="20px"></a></li>
                
@@ -67,6 +68,11 @@
                         <i class="fa-solid fa-cart-shopping"></i>
                         <span class="badge bg-danger">{{ total_items }}</span>
                     </a>
+=======
+                <li><a href="{% url 'perfil'%}"><img src="{% static 'img/perfil.png'%}" width="20px" height="20px"></a></li>
+                  
+                <li ><a href="">  <img src="{% static 'img/carrito.png' %}"  width="20px" height="20px"></a></li>
+>>>>>>> 00d15b4a74c201f83bb13db1ae3bb863d518dcc9
 
               
             </ul>

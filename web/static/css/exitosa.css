@@ -1,0 +1,37 @@
+body {
+    color: white;
+}
+
+.container, .container2, .container3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.tarjeta {
+    background-color: #502c6a;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    color: white;
+}
+
+.carta h1, .carta p, .carta a {
+    color: white;
+}
+
+.carta a {
+    text-decoration: none;
+    background-color: #007bff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 10px;
+    color: white;
+}
+
+.carta a:hover {
+    background-color: #0056b3;
+}
