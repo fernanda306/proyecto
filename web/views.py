@@ -15,6 +15,9 @@ from django.urls import reverse
 from django.urls import path
 from .forms import ReservacionForm
 from django.shortcuts import get_object_or_404
+from django.shortcuts import render
+from .models import Producto
+
 
 logger = logging.getLogger(__name__)
 
@@ -122,6 +125,10 @@ def sugerencias(request):
         form = SugerenciaForm()
     return render(request, 'sugerencias.html', {'form': form})
 
+
+
+
+
 def reservacion(request):
     form = ReservacionForm()
     if request.method == 'POST':
@@ -135,38 +142,21 @@ def reservacion_exitosa(request):
     return render(request, 'reservacion_exitosa.html')
 
 
-def reservacion(request):
-    form = ReservacionForm()
-    if request.method == 'POST':
-        form = ReservacionForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('reservacion_exitosa')
-    return render(request, 'reservacion.html', {'form': form})
 
-    try:
-        producto = Producto.objects.get(id=producto_id)
-        if not request.user.is_authenticated:
-            if not request.session.session_key:
-                request.session.create()
-            sesion_id = request.session.session_key
-            carrito_item, created = carritoitem.objects.get_or_create(
-                producto=producto, sesion_id=sesion_id, usuario=None
-            )
-            if not created:
-                carrito_item.cantidad += 1
-                carrito_item.save()
-        else:
-            carrito_item, created = carritoitem.objects.get_or_create(
-                producto=producto, usuario=request.user,
-            )
-            if not created:
-                carrito_item.cantidad += 1
-                carrito_item.save()
-        messages.success(request, f"{producto.nombre} añadido al carrito")
-    except Producto.DoesNotExist:
-        messages.error(request, "Producto no encontrado")
-    return render(request, 'productos.html', {'productos': producto_lista})
+def productos(request):
+    productos = Producto.objects.all()
+    return render(request, 'productos.html', {'productos': productos})
+
+
+
+
+
+
+
+
+
+
+
 
 
 def cerrar_sesion(request):
@@ -203,6 +193,10 @@ def resetear(request):
             return redirect('resetear')
     return render(request, 'resetear.html')
 
+
+
+
+
 def cambiar(request, uidb64, token):
     try:
         uid = force_str(urlsafe_base64_decode(uidb64))
@@ -221,9 +215,14 @@ def cambiar(request, uidb64, token):
             
     except (TypeError, ValueError, OverflowError, User.DoesNotExist):
         return redirect("login")
+    
+
+
 
 def cambiada(request):
     return render(request, 'cambiada.html')
+
+
 
 @login_required  # Asegura que solo usuarios conectados puedan ver esta página
 def perfil(request):
@@ -231,6 +230,31 @@ def perfil(request):
     return render(request, 'perfil.html', {
         'user': request.user,
     })
+
+
+
+
+def ver_carrito(request):
+     carrito_items = []
+     total = 0
+
+     if request.user.is_authenticated:
+         carrito_items = carritoitem.objects.filter(usuario=request.user)
+     else:
+         if request.session.session_key:
+             carrito_items = carritoitem.objects.filter(sesion_id=request.session.session_key)
+            
+     for item in carrito_items:
+         total += item.subtotal()
+
+     return render(request, 'carrito.html', {
+         'carrito_items': carrito_items,
+         'total': total,
+     })
+
+
+
+
 
 def actualizar_carrito(request, item_id):
     try:

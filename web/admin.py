@@ -36,9 +36,4 @@ class ReservacionAdmin(admin.ModelAdmin):
     list_filter = ('fecha', 'hora')
     search_fields = ('nombre', 'mensaje')
     date_hierarchy = 'fecha'
-@admin.register(Reservacion)
-class ReservacionAdmin(admin.ModelAdmin):
-    list_display = ('nombre', 'fecha', 'hora', 'num_personas', 'fecha_creacion')
-    list_filter = ('fecha', 'hora')
-    search_fields = ('nombre', 'mensaje')
-    date_hierarchy = 'fecha'
+
