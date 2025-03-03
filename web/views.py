@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login
 
 from .forms import SugerenciaForm
-from .models import Producto
+from .models import Producto, carritoitem
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 
@@ -24,6 +24,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 
 
+from django.shortcuts import get_object_or_404
 
 
 
@@ -124,20 +125,6 @@ def gracias(request):
     return render (request, 'gracias.html')
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def sugerencias (request):
     if request.method == 'POST':
         form = SugerenciaForm(request.POST)
@@ -149,11 +136,6 @@ def sugerencias (request):
         form = SugerenciaForm()
 
     return render(request, 'sugerencia.html', {'form': form})
-
-
-
-
-
 
 
 def reserva(request):
@@ -169,10 +151,37 @@ def reserva(request):
 
 
 
-def productos(request):
-    productos = Producto.objects.all()  # Obtiene todos los productos
-    return render(request, 'productos.html', {'productos': productos})
+# def productos(request):
+#     productos = Producto.objects.all()  # Obtiene todos los productos
+#     return render(request, 'productos.html', {'productos': productos})
 
+def productos(request):
+    producto_lista = Producto.objects.all()
+    if request.method == "POST" and 'producto_id' in request.POST:
+        producto_id = request.POST.get('producto_id')
+        try:
+            producto = Producto.objects.get(id=producto_id)
+            if not request.user.is_authenticated:
+                if not request.session.session_key:
+                    request.session.create()
+                sesion_id = request.session.session_key
+                carrito_item, created = carritoitem.objects.get_or_create(
+                    producto=producto, sesion_id=sesion_id, usuario=None
+                )
+                if not created:
+                    carrito_item.cantidad += 1
+                    carrito_item.save()
+            else:
+                carrito_item, created = carritoitem.objects.get_or_create(
+                    producto=producto, usuario=request.user,
+                )
+                if not created:
+                    carrito_item.cantidad += 1
+                    carrito_item.save()
+            messages.success(request, f"{producto.nombre} añadido al carrito")
+        except Producto.DoesNotExist:
+            messages.error(request, "Producto no encontrado")
+    return render(request, 'productos.html', {'productos': producto_lista})
 
 
 def cerrar_sesion(request):
@@ -234,26 +243,76 @@ def cambiar(request, uidb64, token):
 def cambiada(request):
         return render (request, 'cambiada.html')
 
-    
 
-            
+#* carrito 
+def ver_carrito(request) :
+    carrito_items = []
+    total = 0
 
+    if request.user.is_authenticated:
+        carrito_items = carritoitem.objects.filter(usuario=request.user)
+    else:
+        if request.session.session_key:
+            carrito_items = carritoitem.objects.filter(sesion_id=request.session.session_key)
+    for item in carrito_items:
+        total += item. subtotal()
+    return render (request, 'carrito.html', {
+        'carrito_items': carrito_items,
+        'total': total
+    })
 
+def actualizar_carrito(request, item_id):
+    try:
+        item = carritoitem.objects.get(id=item_id)
 
+        if request.user.is_authenticated and item.usuario == request.user or \
+            not request.user.is_authenticated and item.sesion_id == request.session.session_key:
 
+            cantidad = int(request. POST.get ( 'cantidad', 1))
+            if cantidad > 0:
+                item. cantidad = cantidad
+                item. save()
+            else:
+                item. delete()
 
+            messages. success (request, "Carrito actualizado")
+        else:
+            messages.error(request, "No tienes permiso para modificar este item")
+    except carritoitem.DoesNotExist:
+        messages.error (request, "Item no encontrado")
+    return redirect('ver_carrito')
 
+def eliminar_item(request, item_id):
+    try:
+        item = carritoitem.objects.get(id=item_id)
+        if request.user.is_authenticated and item.usuario == request.user or \
+           not request.user.is_authenticated and item.sesion_id == request.session.session_key:
+            item.delete()
+            messages.success(request, "Item eliminado del carrito")
+        else:
+            messages.error(request, "No tienes permiso para eliminar este item")
+    except carritoitem.DoesNotExist:
+        messages.error(request, "Item no encontrado")
+    return redirect('ver_carrito')
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+def agregar_item(request, producto_id):
+    producto = get_object_or_404(Producto, id=producto_id)
+    if not request.user.is_authenticated:
+        if not request.session.session_key:
+            request.session.create()
+        sesion_id = request.session.session_key
+        carrito_item, created = carritoitem.objects.get_or_create(
+            producto=producto, sesion_id=sesion_id, usuario=None
+        )
+        if not created:
+            carrito_item.cantidad += 1
+            carrito_item.save()
+    else:
+        carrito_item, created = carritoitem.objects.get_or_create(
+            producto=producto, usuario=request.user,
+        )
+        if not created:
+            carrito_item.cantidad += 1
+            carrito_item.save()
+    messages.success(request, f"{producto.nombre} añadido al carrito")
+    return redirect('ver_carrito')

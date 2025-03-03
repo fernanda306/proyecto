@@ -1,15 +1,8 @@
 from django.contrib import admin
-from django.contrib import admin
 from django.utils.html import format_html
-from .models import Producto
-
-
-
+from .models import Producto, carritoitem, datos
 
 # Register your models here.
-# class  productoAdmin(admin.ModelAdmin):
-#     model = producto
-#     list_display =('nombre','descripcion','pecio','fecha_creacion')
 
 @admin.register(Producto)
 class ProductoAdmin(admin.ModelAdmin):
@@ -25,7 +18,14 @@ class ProductoAdmin(admin.ModelAdmin):
     mostrar_imagen.short_description = "Imagen"
 
 
+@admin.register(carritoitem)
+class carritoitemAdmin(admin.ModelAdmin):
+    list_display = ('producto', 'cantidad', 'usuario', 'sesion_id', 'fecha_creacion')
+    list_filter = ('fecha_creacion',)   
+    search_fields = ('producto__nombre', 'usuario__username')
 
 
-
-
+@admin.register(datos)
+class Adminperfilusuario(admin.ModelAdmin):
+    model = datos
+    list_display = ('usuario', 'nombre', 'apellido')

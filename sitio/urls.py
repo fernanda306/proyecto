@@ -20,6 +20,9 @@ from web import views
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.urls import path
+from web import views
+from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -40,14 +43,15 @@ urlpatterns = [
     path('resetear/', views.resetear, name='resetear'),
     path("cambiar/<uidb64>/<token>/", views.cambiar, name="cambiar"),
     path("cambiada", views.cambiada, name="cambiada"),
+    path("carrito/", views.ver_carrito, name=" ver_carrito"),
+    path('carrito/actualizar/<int:item_id>/', views.actualizar_carrito, name='actualizar_carrito'),
+    path('carrito/eliminar/<int:item_id>/', views.eliminar_item, name='eliminar_item'),
+    path('carrito/agregar/<int:producto_id>/', views.agregar_item, name='agregar_item'),
+    path('carrito/agregar/<int:producto_id>/', views.agregar_item, name='agregar_item'),
+    path('carrito/', views.ver_carrito, name='carrito')
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-
-
-
-
 
 
 
