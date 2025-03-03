@@ -123,7 +123,7 @@ def sugerencias(request):
             return redirect('sugerencia')
     else:
         form = SugerenciaForm()
-    return render(request, 'sugerencias.html', {'form': form})
+    return render(request, 'sugerencia.html', {'form': form})
 
 
 
@@ -135,6 +135,7 @@ def reservacion(request):
         form = ReservacionForm(request.POST)
         if form.is_valid():
             form.save()
+            form.send_mail()
             return redirect('reservacion_exitosa')
     return render(request, 'reservacion.html', {'form': form})
 
@@ -161,8 +162,6 @@ def productos(request):
 
 def cerrar_sesion(request):
     logout(request)
-    # messages.success(request, "¡Hasta luego!")
-
     return redirect('home')
 
 
@@ -224,12 +223,44 @@ def cambiada(request):
 
 
 
-@login_required  # Asegura que solo usuarios conectados puedan ver esta página
+# @login_required  # Asegura que solo usuarios conectados puedan ver esta página
+# def perfil(request):
+#     # El usuario actual está disponible como request.user
+#     return render(request, 'perfil.html', {
+#         'user': request.user,
+#     })
+
+
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+
+@login_required
 def perfil(request):
-    # El usuario actual está disponible como request.user
-    return render(request, 'perfil.html', {
-        'user': request.user,
-    })
+    """
+    Vista que muestra la información completa del usuario actual.
+    El decorador @login_required asegura que solo usuarios autenticados accedan.
+    """
+    user = request.user
+    
+    # Preparar el contexto con toda la información relevante del usuario
+    context = {
+        'username': user.username,
+        'first_name': user.first_name,
+        'last_name': user.last_name,
+        'full_name': f"{user.first_name} {user.last_name}",
+        'email': user.email,
+        'is_active': user.is_active,
+        'date_joined': user.date_joined,
+        'last_login': user.last_login,
+        # Si tienes un modelo de perfil extendido, puedes agregar esa información aquí
+    }
+    
+    # También puedes agregar permisos o grupos si necesitas esa información
+    context['is_staff'] = user.is_staff
+    context['is_superuser'] = user.is_superuser
+    context['groups'] = user.groups.all()
+    
+    return render(request, 'perfil.html', context)
 
 
 

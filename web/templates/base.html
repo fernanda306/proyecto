@@ -57,14 +57,19 @@
 
 
 
-                    <li><a href="{% url 'login'%}"><img src="{% static 'img/perfil.png'%}" width="20px" height="20px"></a></li>
+                    <li><a href="{% url 'perfil'%}"><img src="{% static 'img/perfil.png'%}" width="20px" height="20px"></a></li>
                     <li><a href="{% url 'carrito' %}"><img src="{% static 'img/carrito.png' %}" width="20px" height="20px"></a></li>
                
                     
 
+                {%endif%}
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}"><img src="{% static 'img/cerrar.png' %}" width="20px" height="20px"></a></li>
+                {% endif %}
+
                 {% with total_items=request.user.carritoitem_set.count %}
                     {% if total_items > 0 %}
-                    <a href="{% url 'carrito'%}"><img src="{% static 'img/carrito.png' %}"  width="20px" height="20px"></a>
+                  
                         <i class="fa-solid fa-cart-shopping"></i>
                         <span class="badge bg-danger">{{ total_items }}</span>
                     </a>
@@ -81,7 +86,6 @@
 
                 {% endif %}
                 {% endwith %}
-                {% endif %}
             </ul>
 
 

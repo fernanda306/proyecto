@@ -36,14 +36,6 @@ class SugerenciaForm(forms.ModelForm):
 
 
 
-
-
-
-
-
-
-
-
 class ReservacionForm(forms.ModelForm):
     class Meta:
         model = Reservacion

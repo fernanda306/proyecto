@@ -6,88 +6,46 @@
 
 <link rel="stylesheet" href="{% static 'css/perfil.css' %}">
 
-<div class="container5">
-    <div class="una">
-        <div class="dos">
-            <div class="carta">
-                <div class="tres">
-                    <h2 class="cuatro">Mi Perfil</h2>
-                </div>
-                <div class="cinco">
-                    <div class="seis">
-                        <div class="siete">Nombre de usuario:</div>
-                        <div class="ocho">{{ usuario.username }}</div>
-                    </div>
-                    
-               
-                    
-                    <div class="nueve">
-                        <div class="diez">Correo electrónico:</div>
-                        <div class="once">{{ usuario.email }}</div>
-                    </div>
-                    
-                    <div class="doce">
-                        <div class="trece">Fecha de registro:</div>
-                        <div class="catorce">{{ usuario.date_joined|date:"d/m/Y" }}</div>
-                    </div>
-                    
-                    <div class="quince">
-                        <div class="dieciseis">Última conexión:</div>
-                        <div class="diecisiete">{{ usuario.last_login|date:"d/m/Y H:i" }}</div>
-                    </div>
-                    
-                    <!-- Puedes agregar más campos aquí si los tienes en tu modelo de Usuario personalizado -->
-                    
-                    <div class="dieciocho">
-                        <a href="{% url 'home' %}" class="veinte">Volver</a>
-                      
-                    </div>
-                </div>
+<div class="user-info-container">
+    <h1>Información de Usuario</h1>
+    
+    <div class="profile-section">
+        <div class="profile-header">
+            <h2>{{ full_name|default:username }}</h2>
+            {% if is_staff %}<span class="badge staff">Staff</span>{% endif %}
+            {% if is_superuser %}<span class="badge admin">Administrador</span>{% endif %}
+        </div>
+        
+        <div class="profile-details">
+            <div class="detail-item">
+                <h3>Información básica</h3>
+                <p><strong>Nombre de usuario:</strong> {{ username }}</p>
+                {% if first_name %}<p><strong>Nombre:</strong> {{ first_name }}</p>{% endif %}
+                {% if last_name %}<p><strong>Apellido:</strong> {{ last_name }}</p>{% endif %}
+                <p><strong>Email:</strong> {{ email }}</p>
             </div>
+            
+            <div class="detail-item">
+                <h3>Estado de la cuenta</h3>
+                <p><strong>Cuenta activa:</strong> {% if is_active %}Sí{% else %}No{% endif %}</p>
+                <p><strong>Fecha de registro:</strong> {{ date_joined|date:"d/m/Y H:i" }}</p>
+                <p><strong>Último acceso:</strong> {{ last_login|date:"d/m/Y H:i" }}</p>
+            </div>
+            
+            {% if groups.exists %}
+            <div class="detail-item">
+                <h3>Grupos</h3>
+                <ul>
+                    {% for group in groups %}
+                    <li>{{ group.name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
         </div>
     </div>
 </div>
 
-<!-- Sección para mostrar las reservaciones -->
-<!-- <div class="ventiunio">
-    <div class="ventidos">
-        <h3 class="ventitres">Mis Reservaciones</h3>
-    </div>
-    <div class="tarjeta_historial">
-        {% if reservaciones %}
-            <div class="tabla">
-                <table class="tablados">
-                    <thead>
-                        <tr>
-                            <th>Fecha</th>
-                            <th>Hora</th>
-                            <th>Personas</th>
-                            <th>Estado</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for reserva in reservaciones %}
-                        <tr>
-                            <td>{{ reserva.fecha|date:"d/m/Y" }}</td>
-                            <td>{{ reserva.hora }}</td>
-                            <td>{{ reserva.num_personas }}</td>
-                            <td>
-                                {% if reserva.fecha >= today %}
-                                <span class="venticuatro">Activa</span>
-                                {% else %}
-                                <span class="venticinco">Pasada</span>
-                                {% endif %}
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        {% else %}
-            <p class="ventiseis">No tienes reservaciones.</p>
-        {% endif %}
-    </div>
-</div> -->
 
 
 {% endblock %}
