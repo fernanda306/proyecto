@@ -3,54 +3,25 @@
 
 <html lang="en">
 <head>
-
-    <style>
-    .contaner9 {
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
-    flex-direction: column;
-    height: 50vh;
-    text-align: center;
-}
-
-h2 {
-    color: #ffffff;
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.contaner9 a {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    text-decoration: none;
-    font-size: 18px;
-    border-radius: 5px;
-    transition: background 0.3s;
-}
-
-.contaner9 a:hover {
-    background-color: #0056b3;
-}
-    </style>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>restablecer contraseña</title>
-    <link rel="stylesheet" href="{% static 'css/cambiar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cambiada.css' %}">
 </head>
 
 <body>
- <h2>Tu contraseña ha sido cambiada con éxito</h2>
- <div class="contaner9">
+    <div class="container">
+        
+    <h2>Tu contraseña ha sido cambiada con éxito</h2>
+
+
+
+
 
 <a href="{% url 'login' %}">Volver al login</a>
 
-</div>
 
+</div>
 
 </body>
 </html>

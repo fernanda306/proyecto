@@ -1,55 +1,67 @@
-.container6{
+
+ .container6 {
     display: flex;
     justify-content: center;
-    margin-bottom: 10%;
+    align-items: center;
+    min-height: 100vh;
+  
+    font-family: 'Arial', sans-serif;
 }
 
-form {
-    background:  rgb(56, 57, 89);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+.container6 form {
+    width: 100%;
+    max-width: 450px;
+    background:  rgb(36, 44, 190)1;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px white ;
+    transition: all 0.3s ease;
+}
+
+
+
+.container6 form h2 {
     text-align: center;
-    width: 100%;
-    max-width: 400px;
+    color: #ffffff;
+    margin-bottom: 30px;
+    font-weight: 600;
 }
 
-input[type="text"],
-input[type="email"] {
+.container6 input {
+    box-shadow: 0 4px 6px white ;
     width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: none;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    outline: none;
-    font-size: 16px;
+    transition: border-color 0.3s ease;
 }
 
-button {
-    background-color:  #6128a7;
-    color: white;
-    padding: 10px 15px;
+.container6 input:focus {
+    outline: none;
+    border-color: #4A90E2;
+}
+
+.container6 button {
+    width: 100%;
+    padding: 12px;
+    background: #825bbf;
+    color: rgb(255, 255, 255);
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
-    transition: background 0.3s;
+    transition: background-color 0.3s ease;
 }
 
-button:hover {
-    background-color: #8d35a2;
+.container6 button:hover {
+    background: #9f8dd1;
 }
 
-.messages p {
-    background: #6f41ab;
-    color: white;
+.container6 .messages {
+    background-color: #4CAF50;
+    color: rgb(161, 72, 72);
     padding: 10px;
     border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: center;
 }
-
-h2{
-    color: white;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    margin-bottom: 3%;
-}
-

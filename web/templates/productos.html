@@ -9,34 +9,8 @@
 <link rel="stylesheet" href="{% static 'css/productos.css'%}">
 
 <div class="container">
-	<header>
-		
-		<form action="javascript:void(0);">
-			<input type="text" id="bar-search" class="bar-search" placeholder="Buscar">
-		</form>
-		
-		<div id="categories" class="categories">
-			<a href="javascript:void(0);" class="active">
-			 Todo
-			</a>
-			
-			<a href="javascript:void(0);">
-			 Hamburguesas
-			</a>
-			
-			<a href="javascript:void(0);">
-			 Patacolos
-			</a>
-			
-			<a href="javascript:void(0);">
-			 Perros calientes
-			</a>
-			
-			<a href="javascript:void(0);">
-			 Salchipapas
-			</a>
-		</div>
-	</header>
+	<h3> Carta de productos</h3>
+
     
 {% if productos %}
     <div class="productos-container">
@@ -50,8 +24,14 @@
                 <h2>{{ producto.nombre }}</h2>
                 <p>{{ producto.caracteristicas }}</p>
                 <p class="precio">${{ producto.precio }}</p>
-                <button type="button" class="btn btn-success btn-sm comprar-btn" data-id="{{producto}}">añadir al carrito</button>
-            </div>
+				<form method="POST" action="{% url 'productos' %}">
+					{% csrf_token %}
+					<input type="hidden" name="producto_id" value="{{ producto.id }}">
+					<button type="submit" class="btn w-100" style="background-color: var(--acento); color: var(--texto-claro);">
+						Agregar al carrito
+					</button>
+				</form>
+			</div>
         {% endfor %}
     </div>
 {% else %}

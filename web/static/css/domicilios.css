@@ -4,14 +4,14 @@
     width: 70%;
     margin: 30px auto;
     padding: 25px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
     border-radius: 10px;
-    background-color: #f9f9f9;
+    background:  rgb(56, 57, 89);
   }
   
   h2.titulo {
     text-align: center;
-    background-color: rgb(221, 187, 51);
+    background:  rgb(85, 87, 137);
     color: white;
     padding: 12px 25px;
     font-size: 26px;
@@ -25,7 +25,7 @@
     display: flex;
     align-items: center;
     margin: 25px 0;
-    background: #fff;
+    background:  rgb(168, 172, 252)1;
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
@@ -34,7 +34,7 @@
   
   .opcion:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px white;
   }
   
   .opcion img {
@@ -43,7 +43,7 @@
     object-fit: cover;
     border-radius: 10px;
     margin-right: 25px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 3px 6px white;
   }
   
   .descripcion {
@@ -53,17 +53,17 @@
   .descripcion h3 {
     font-size: 22px;
     margin: 0 0 15px 0;
-    color: #333;
+    color: #ffffff;
   }
   
   .descripcion h3 span {
-    color: #d33;
+    color: rgb(255, 255, 255);
     font-weight: bold;
   }
   
   .descripcion p {
     font-size: 16px;
-    color: #555;
+    color: #ffffff;
     margin-bottom: 20px;
     line-height: 1.5;
   }
@@ -71,7 +71,7 @@
   .descripcion a {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #4CAF50;
+    background: #825bbf;
     color: white;
     text-decoration: none;
     border-radius: 5px;
@@ -80,7 +80,7 @@
   }
   
   .descripcion a:hover {
-    background-color: #388E3C;
+    background: #9f8dd1;
   }
   
   .link img {

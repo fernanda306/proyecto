@@ -10,10 +10,10 @@ body {
 }
 
 .tarjeta {
-    background-color: #502c6a;
+
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px white;
     text-align: center;
     color: white;
 }
@@ -24,7 +24,7 @@ body {
 
 .carta a {
     text-decoration: none;
-    background-color: #007bff;
+    background: #825bbf;
     padding: 10px 15px;
     border-radius: 5px;
     display: inline-block;
@@ -33,5 +33,5 @@ body {
 }
 
 .carta a:hover {
-    background-color: #0056b3;
+    background: #9f8dd1;
 }

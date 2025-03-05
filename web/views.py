@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login
 from .forms import SugerenciaForm
-from .models import Producto, carritoitem, Reservacion
+from .models import  carritoitem, Reservacion
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.contrib.auth.tokens import default_token_generator 
@@ -17,7 +17,11 @@ from .forms import ReservacionForm
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from .models import Producto
+from django.contrib.auth.decorators import login_required
 
+
+from .models import orden, ordenitem, carritoitem
+from .forms import ordenForm
 
 logger = logging.getLogger(__name__)
 
@@ -152,6 +156,47 @@ def productos(request):
 
 
 
+from .models import Producto, carritoitem
+def productos(request):
+    producto_lista = Producto.objects.all()
+
+    if request.method == "POST" and 'producto_id' in request.POST:
+        producto_id = request.POST.get('producto_id')
+        try:
+            producto = Producto.objects.get(id=producto_id)
+            
+            if not request.user.is_authenticated:
+                if not request.session.session_key:
+                    request.session.create()
+                sesion_id = request.session.session_key
+                
+                carrito_item, created = carritoitem.objects.get_or_create(
+                    producto=producto,
+                    sesion_id=sesion_id,
+                    usuario=None
+                )
+                
+                if not created:
+                    carrito_item.cantidad += 1
+                    carrito_item.save()
+            else:
+                carrito_item, created = carritoitem.objects.get_or_create(
+                    producto=producto,
+                    usuario=request.user,
+                    sesion_id=None
+                )
+                
+                if not created:
+                    carrito_item.cantidad += 1
+                    carrito_item.save()
+            
+            messages.success(request, f"{producto.nombre} añadido al carrito")
+        except Producto.DoesNotExist:
+            messages.error(request, "Producto no encontrado")
+    
+    return render(request, 'productos.html', {'productos': producto_lista})
+
+
 
 
 
@@ -223,26 +268,15 @@ def cambiada(request):
 
 
 
-# @login_required  # Asegura que solo usuarios conectados puedan ver esta página
-# def perfil(request):
-#     # El usuario actual está disponible como request.user
-#     return render(request, 'perfil.html', {
-#         'user': request.user,
-#     })
 
 
-from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
+
 
 @login_required
 def perfil(request):
-    """
-    Vista que muestra la información completa del usuario actual.
-    El decorador @login_required asegura que solo usuarios autenticados accedan.
-    """
+  
     user = request.user
     
-    # Preparar el contexto con toda la información relevante del usuario
     context = {
         'username': user.username,
         'first_name': user.first_name,
@@ -252,10 +286,8 @@ def perfil(request):
         'is_active': user.is_active,
         'date_joined': user.date_joined,
         'last_login': user.last_login,
-        # Si tienes un modelo de perfil extendido, puedes agregar esa información aquí
+       
     }
-    
-    # También puedes agregar permisos o grupos si necesitas esa información
     context['is_staff'] = user.is_staff
     context['is_superuser'] = user.is_superuser
     context['groups'] = user.groups.all()
@@ -321,24 +353,154 @@ def eliminar_item(request, item_id):
         messages.error(request, "Item no encontrado")
     return redirect('ver_carrito')
 
-def agregar_item(request, producto_id):
-    producto = get_object_or_404(Producto, id=producto_id)
-    if not request.user.is_authenticated:
-        if not request.session.session_key:
-            request.session.create()
-        sesion_id = request.session.session_key
-        carrito_item, created = carritoitem.objects.get_or_create(
-            producto=producto, sesion_id=sesion_id, usuario=None
-        )
-        if not created:
-            carrito_item.cantidad += 1
-            carrito_item.save()
+
+
+
+
+
+
+def pasarela(request):
+    carritoitem =[]
+    total = 0
+
+    if request.user.is_authenticated:
+
+        carrito_items = carritoitem.objects.filter(usuario=request.user)
+
     else:
-        carrito_item, created = carritoitem.objects.get_or_create(
-            producto=producto, usuario=request.user,
-        )
-        if not created:
-            carrito_item.cantidad += 1
-            carrito_item.save()
-    messages.success(request, f"{producto.nombre} añadido al carrito")
-    return redirect('ver_carrito')
+        if request.session.session_key:
+            carrito_items = carritoitem.objects.filter(sesion_id=request.session.session_key)
+
+
+# Si el carrito está vacío, mostrar advertencia
+    if not carrito_items:
+        messages.warning(request, "Tu carrito está vacío")
+        return redirect('ver_carrito')
+    
+
+
+    # Calcular el total del pedido
+    for item in carrito_items:
+        total += item.subtotal()
+
+    if request.method == 'POST':
+            form = ordenForm(request.POST)
+            metodo_pago = request.POST.get('metodo_pago')
+
+    if form.is_valid() and metodo_pago:
+        orden = form.save(commit=False)
+
+        if request.user.is_authenticated:
+            orden.usuario = request.user
+        else:
+            orden.sesion_id = request.session.session_key
+
+            orden.total = total
+            orden.metodo_pago = metodo_pago
+            orden.save()
+
+# Guardar los productos en la orden
+        for item in carrito_items:
+            ordenitem.objects.create(
+                orden=orden,
+                producto=item.producto,
+                precio=item.producto.precio,
+                cantidad=item.cantidad
+    )
+# Vaciar el carrito después del pago
+            carrito_items.delete()
+
+
+        # 📧 Enviar el correo de confirmación
+            enviar_correo_confirmacion(orden)
+            messages.success(request, "Tu pedido ha sido procesado con éxito")
+            return redirect('confirmar', orden_id=orden.id)
+        else:
+              messages.error(request, "Por favor selecciona un método de pago válido.")
+    else:
+
+# Precargar los datos del usuario en el formulario
+        initial_data = {}
+        if request.user.is_authenticated:
+            try:
+                datos = datos.objects.get(usuario=request.user)
+                initial_data = {
+                        'nombre': f"{datos.nombre} {datos.apellido}",
+                        'email': request.user.email
+                }
+
+            except datos.DoesNotExist:
+                initial_data = {
+                    'nombre': request.user.username,
+                    'email': request.user.email
+                }
+
+
+            form = ordenForm(initial=initial_data)
+    return render(request, 'pasarela.html', {
+        'form': form,
+        'carrito_items': carrito_items,
+        'total': total
+        })
+
+
+
+
+
+
+
+
+
+
+
+
+def confirmacion(request, orden_id):
+    try:
+        if request.user.is_authenticated:
+            orden = orden.objects.get(id=orden_id, usuario=request.user)
+        else:
+                orden = orden.objects.get(id=orden_id,
+sesion_id=request.session.session_key)
+        items = ordenitem.objects.filter(orden=orden)
+
+        return render(request, 'confirmar.html',{  'orden': orden, 'items': items})
+    
+
+
+    except orden.DoesNotExist:
+        messages.error(request, "Orden no encontrada")
+        return redirect('productos')
+    
+
+def enviar_correo_confirmacion(orden):
+
+    asunto = f"Confirmación de Pedido #{orden.id}"
+    mensaje = f"""
+    Hola {orden.nombre},
+        Gracias por tu compra. Hemos recibido verificar la compra en su cuenta .
+        🛍 *Detalles del Pedido*
+        - Número de Pedido: {orden.id}
+        - Total: ${orden.total}
+        - Método de Pago: {orden.get_metodo_pago_display()}
+        - Fecha: {orden.fecha_creacion.strftime('%d/%m/%Y %H:%M')}
+        📦 *Productos Comprados*:
+        """
+# Agregar productos al mensaje
+    items = ordenitem.objects.filter(orden=orden)
+    for item in items:
+        mensaje += f"\n - {item.cantidad} x {item.producto.nombre} (${item.precio} c/u)"
+     
+    #  (${items.precio}c/u)"
+        mensaje += f"\n - {item.cantidad} x {item.producto.nombre}"
+    send_mail(
+    asunto,
+    mensaje,
+    'jalmpa77@gmail.com', # Correo del remitente
+    [orden.email],
+    fail_silently=False,
+    )
+
+
+    
+def pasarela(request):
+    return render(request, 'pasarela.html')

@@ -4,6 +4,7 @@
 }
 
 .container1 {
+ 
   margin: 0 auto;
   margin-top: 5%;
   margin-bottom: 10%;
@@ -17,6 +18,7 @@
   border-radius: 15px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   animation: fadeIn 2s ease-out;
+  box-shadow: 0 0 10px  white; 
 }
 
 .title {
@@ -52,6 +54,7 @@
 /* mapa y buzon */
 
 .container{
+  box-shadow: 0 0 10px  white; 
 display: flex;
 justify-content: center;
 }
@@ -157,6 +160,7 @@ p a:hover {
 
 
  .container2 {
+  box-shadow: 0 0 10px  white; 
   margin-left: 5%;
   width: 50%;
   max-width: 900px;
@@ -235,6 +239,7 @@ h2 {
 
 
 .container3 {
+  box-shadow: 0 0 10px  white; 
   flex-direction: row-reverse;
   margin-left: 45%;
   width: 50%;

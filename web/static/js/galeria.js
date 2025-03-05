@@ -125,72 +125,53 @@
 
 
 // });
-
-
-const images = [
-  {
-      src: "{ static 'img/1.jpg' }",
-      title: "ensalada fitness",
-      description: "Hermosas vistas de montañas cubiertas de nieve y vegetación"
-  },
-  {
-      src: "/api/placeholder/800/600",
-      title: "Playa tropical",
-      description: "Arena blanca y aguas cristalinas en un paraíso tropical"
-  },
-  {
-      src: "/api/placeholder/800/600",
-      title: "Ciudad moderna",
-      description: "Rascacielos y arquitectura urbana contemporánea"
-  },
-  {
-      src: "/api/placeholder/800/600",
-      title: "Bosque denso",
-      description: "Naturaleza verde y exuberante con árboles centenarios"
-  },
-  {
-      src: "/api/placeholder/800/600",
-      title: "Desierto árido",
-      description: "Extensiones de arena y dunas bajo el sol intenso"
-  },
-  {
-      src: "/api/placeholder/800/600",
-      title: "Lago tranquilo",
-      description: "Aguas calmas rodeadas de vegetación exuberante"
-  }
-];
-
-const modal = document.getElementById('imageModal');
-const modalImage = document.getElementById('modalImage');
-const modalTitle = document.getElementById('modalTitle');
-const modalDescription = document.getElementById('modalDescription');
-
-// Función para abrir el modal
-function openModal(index) {
-  const image = images[index];
-  modalImage.src = image.src;
-  modalTitle.textContent = image.title;
-  modalDescription.textContent = image.description;
-  modal.classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
-
-// Función para cerrar el modal
-function closeModal() {
-  modal.classList.remove('active');
-  document.body.style.overflow = '';
-}
-
-// Cerrar modal al hacer clic fuera de la imagen
-modal.addEventListener('click', function(event) {
-  if (event.target === modal) {
-      closeModal();
-  }
-});
-
-// Cerrar modal con la tecla Escape
-document.addEventListener('keydown', function(event) {
-  if (event.key === 'Escape' && modal.classList.contains('active')) {
-      closeModal();
+document.addEventListener('DOMContentLoaded', function() {
+  // Elementos del DOM
+  const galleryItems = document.querySelectorAll('.gallery-item');
+  const modal = document.getElementById('infoModal');
+  const closeButton = document.querySelector('.close-button');
+  const modalImage = document.getElementById('modalImage');
+  const modalTitle = document.getElementById('modalTitle');
+  const infoTitle = document.getElementById('infoTitle');
+  const infoDescription = document.getElementById('infoDescription');
+  
+  // Abrir modal al hacer clic en un elemento de la galería
+  galleryItems.forEach(item => {
+      item.addEventListener('click', function() {
+          // Obtener datos
+          const info = JSON.parse(this.dataset.info);
+          const img = this.querySelector('.gallery-img');
+          
+          // Actualizar modal
+          modalImage.src = img.src;
+          modalImage.alt = img.alt;
+          modalTitle.textContent = info.title;
+          infoTitle.textContent = info.title;
+          infoDescription.textContent = info.description;
+          
+          // Mostrar modal
+          modal.style.display = 'block';
+          document.body.style.overflow = 'hidden'; // Prevenir scroll
+      });
+  });
+  
+  // Cerrar modal
+  closeButton.addEventListener('click', closeModal);
+  modal.addEventListener('click', function(e) {
+      if (e.target === modal) {
+          closeModal();
+      }
+  });
+  
+  // Cerrar con tecla Escape
+  document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && modal.style.display === 'block') {
+          closeModal();
+      }
+  });
+  
+  function closeModal() {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto'; // Restaurar scroll
   }
 });

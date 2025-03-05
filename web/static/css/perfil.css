@@ -6,17 +6,17 @@
     margin: 0 auto;
     padding: 30px;
     font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
-    color: #333;
-    background-color: #f9f9f9;
+    color: #ffffff;
+    background:  rgb(56, 57, 89);
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20%;
+    margin-bottom: 5%;
   }
   
   /* Título principal */
   .user-info-container h1 {
     text-align: center;
-    color: #2c3e50;
+    color: #ffffff;
     margin-bottom: 30px;
     padding-bottom: 15px;
     border-bottom: 2px solid #eaeaea;
@@ -25,7 +25,7 @@
   
   /* Sección de perfil */
   .profile-section {
-    background-color: white;
+    background:  rgb(56, 57, 89);
     border-radius: 6px;
     padding: 20px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
@@ -43,7 +43,7 @@
   .profile-header h2 {
     margin: 0;
     font-size: 1.8rem;
-    color: #3498db;
+    color: #ffffff;
   }
   
   /* Badges */
@@ -80,7 +80,7 @@
   
   .detail-item h3 {
     font-size: 1.2rem;
-    color: #2c3e50;
+    color: #ffffff;
     margin-bottom: 15px;
     padding-bottom: 8px;
     border-bottom: 1px solid #f0f0f0;
@@ -93,7 +93,7 @@
   
   .detail-item strong {
     font-weight: 600;
-    color: #555;
+    color: #ffffff;
     margin-right: 5px;
   }
   
@@ -144,7 +144,7 @@
   
   .btn.secondary {
     background-color: #ecf0f1;
-    color: #7f8c8d;
+    color: #ffffff;
     border: 1px solid #ddd;
   }
   

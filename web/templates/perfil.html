@@ -10,12 +10,7 @@
     <h1>Información de Usuario</h1>
     
     <div class="profile-section">
-        <div class="profile-header">
-            <h2>{{ full_name|default:username }}</h2>
-            {% if is_staff %}<span class="badge staff">Staff</span>{% endif %}
-            {% if is_superuser %}<span class="badge admin">Administrador</span>{% endif %}
-        </div>
-        
+      
         <div class="profile-details">
             <div class="detail-item">
                 <h3>Información básica</h3>
@@ -28,8 +23,8 @@
             <div class="detail-item">
                 <h3>Estado de la cuenta</h3>
                 <p><strong>Cuenta activa:</strong> {% if is_active %}Sí{% else %}No{% endif %}</p>
-                <p><strong>Fecha de registro:</strong> {{ date_joined }}</p>
-                <p><strong>Último acceso:</strong> {{ last_login}}</p>
+                <!-- <p><strong>Fecha de registro:</strong> {{ date_joined }}</p>
+                <p><strong>Último acceso:</strong> {{ last_login}}</p> -->
             </div>
             
             {% if groups.exists %}

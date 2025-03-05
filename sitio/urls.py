@@ -46,12 +46,14 @@ urlpatterns = [
     path('resetear/', views.resetear, name='resetear'),
     path("cambiar/<uidb64>/<token>/", views.cambiar, name="cambiar"),
     path("cambiada", views.cambiada, name="cambiada"),
-    path("carrito/", views.ver_carrito, name="ver_carrito"),
+    path('carrito/', views.ver_carrito, name='ver_carrito'),
     path('carrito/actualizar/<int:item_id>/', views.actualizar_carrito, name='actualizar_carrito'),
     path('carrito/eliminar/<int:item_id>/', views.eliminar_item, name='eliminar_item'),
-    path('carrito/agregar/<int:producto_id>/', views.agregar_item, name='agregar_item'),
-    path('carrito/', views.ver_carrito, name='carrito'),
     path('perfil/', views.perfil, name='perfil'),
     path('reservacion/', views.reservacion, name='reservacion'),
     path('reservacion/exitosa/', views.reservacion_exitosa, name='reservacion_exitosa'),
+
+    path('pasarela/', views.pasarela, name='pasarela'),
+    path('confirmacion/<int:orden_id>/', views.confirmacion, name='confirmar'),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

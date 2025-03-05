@@ -24,10 +24,11 @@ class Producto(models.Model):
 class Sugerencia(models.Model):
     username = models.CharField(max_length=100)
     email = models.EmailField()
+    phone = models.CharField(max_length=20, blank=True, null=True)  # Added phone field
     section_text = models.TextField()
 
     def __str__(self):
-        return self.username
+        return f"{self.username} - {self.phone or 'No phone'}"  # Updated __str__ method
 
 
 # Remove the conflicting class definition
@@ -73,6 +74,7 @@ class carritoitem(models.Model):
         return self.producto.precio * self.cantidad
 
 
+
 class datos(models.Model):
     usuario = models.OneToOneField(User, on_delete=models.CASCADE)
     nombre = models.CharField(max_length=100)
@@ -80,3 +82,33 @@ class datos(models.Model):
 
     def __str__(self):
         return f"{self.nombre} {self.apellido}"
+    
+
+
+class orden (models.Model):
+        usuario = models. ForeignKey(User, on_delete=models. CASCADE, null=True, blank=True)
+        nombre = models. CharField (max_length=200)
+        email = models. EmailField ()
+        telefono = models.CharField (max_length=20)
+        sesion_id = models.CharField(max_length=100, null=True, blank=True)
+        total = models.DecimalField(max_digits=10, decimal_places=0)
+        metodo_pago = models.CharField(max_length=20, choices=[( 'nequi','Nequi'), ('bancolombia', 'Bancolombia')])
+        pagado = models.BooleanField(default=False)
+        fecha_creacion = models.DateTimeField (auto_now_add=True)
+
+        def __str__(self):
+            return f"orden #{self.id} - {self.nombre}"
+        
+
+class ordenitem(models.Model):
+
+        orden = models.ForeignKey(orden, related_name='items', on_delete=models.CASCADE)
+        producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+        precio = models.DecimalField(max_digits=10, decimal_places=2)
+        cantidad = models.IntegerField(default=1)
+
+        def __str__(self):
+            return f"orden #{self.cantidad} x {self.producto.nombre}"
+        
+        def subtotal(self):
+             return self.precio  * self.cantidad

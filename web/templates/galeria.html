@@ -8,17 +8,17 @@
 
 
 
-</header>  
+</header>
 
 
 
 
 
 
-<!-- 
+<!--
 <div class="gallery-container">
   <h1>Galería de Imágenes Interactiva</h1>
-  
+
   <div class="filter-container">
       <button class="filter-btn active" data-filter="all">Todos</button>
       <button class="filter-btn" data-filter="naturaleza">Hamburguesas</button>
@@ -26,9 +26,9 @@
       <button class="filter-btn" data-filter="animales">Carnes</button>
       <button class="filter-btn" data-filter="comida">Perros</button>
   </div>
-  
+
   <div class="gallery-grid">
-      <!-- Las imágenes son marcadores de posición generados por la API 
+      <!-- Las imágenes son marcadores de posición generados por la API
       <div class="gallery-item" data-category="naturaleza">
           <img src="{% static 'img/Hot Dog Chingon.jpg' %}" alt="perros">
           <div class="item-overlay">
@@ -36,7 +36,7 @@
               <p class="item-category">comida</p>
           </div>
       </div>
-      
+
       <div class="gallery-item" data-category="arquitectura">
         <img src="{% static 'img/1.jpeg' %}" alt="ciudad">
           <div class="item-overlay">
@@ -44,7 +44,7 @@
               <p class="item-category">Arquitectura</p>
           </div>
       </div>
-      
+
       <div class="gallery-item" data-category="animales">
         <img src="{% static 'img/1.jpeg' %}" alt="leon">
         <div class="item-overlay">
@@ -52,34 +52,34 @@
               <p class="item-category">Animales</p>
           </div>
       </div>
-      
+
       <div class="gallery-item" data-category="comida">
         <img src="{% static 'img/1.jpeg' %}" alt="playa">
         <div class="item-overlay">
-    
+
               <h3 class="item-title">Pasta italiana</h3>
               <p class="item-category">Comida</p>
           </div>
       </div>
-      
+
       <div class="gallery-item" data-category="naturaleza">
         <img src="{% static 'img/1.jpeg' %}" alt="Montañas">
         <div class="item-overlay">
-         
+
               <h3 class="item-title">Playa tropical</h3>
               <p class="item-category">Naturaleza</p>
           </div>
       </div>
-      
+
       <div class="gallery-item" data-category="arquitectura">
         <img src="{% static 'img/1.jpeg' %}" alt="puente">
           <div class="item-overlay">
-      
+
               <h3 class="item-title">Puente Golden Gate</h3>
               <p class="item-category">Arquitectura</p>
           </div>
       </div>
-      
+
       <div class="gallery-item" data-category="animales">
         <img src="{% static 'img/1.jpeg' %}" alt="perr0">
         <div class="item-overlay">
@@ -87,7 +87,7 @@
               <p class="item-category">Animales</p>
           </div>
       </div>
-      
+
       <div class="gallery-item" data-category="comida">
         <img src="{% static 'img/1.jpeg' %}" alt="patio">
         <div class="item-overlay">
@@ -98,7 +98,7 @@
   </div>
 </div>
 
-Lightbox para ver imágenes ampliadas 
+Lightbox para ver imágenes ampliadas
 <div class="lightbox">
   <button class="lightbox-close">&times;</button>
   <div class="lightbox-content">
@@ -116,75 +116,82 @@ Lightbox para ver imágenes ampliadas
 
  -->
 
-  
- <div class="gallery">
-  <!-- Imagen 1 -->
-  <div class="gallery-item" onclick="openModal(0)">
-      <img src="{% static 'img/1.jpeg'%}" alt="Paisaje de montaña">
-      <div class="info">
-          <h3>Paisaje montañoso</h3>
-          <p>Hermosas vistas de montañas</p>
-      </div>
-  </div>
-  
-  <!-- Imagen 2 -->
-  <div class="gallery-item" onclick="openModal(1)">
-    <img src="{% static 'img/1.jpeg'%}" alt="Paisaje de montaña">
-      <div class="info">
-          <h3>Playa tropical</h3>
-          <p>Arena blanca y aguas cristalinas</p>
-      </div>
-  </div>
-  
-  <!-- Imagen 3 -->
-  <div class="gallery-item" onclick="openModal(2)">
-    <img src="{% static 'img/1.jpeg'%}" alt="Paisaje de montaña">
-      <div class="info">
-          <h3>Ciudad moderna</h3>
-          <p>Rascacielos y arquitectura urbana</p>
-      </div>
-  </div>
-  
-  <!-- Imagen 4 -->
-  <div class="gallery-item" onclick="openModal(3)">
-    <img src="{% static 'img/1.jpeg'%}" alt="Paisaje de montaña">
-      <div class="info">
-          <h3>Bosque denso</h3>
-          <p>Naturaleza verde y exuberante</p>
-      </div>
-  </div>
-  
-  <!-- Imagen 5 -->
-  <div class="gallery-item" onclick="openModal(4)">
-    <img src="{% static 'img/1.jpeg'%}" alt="Paisaje de montaña">
-      <div class="info">
-          <h3>Desierto árido</h3>
-          <p>Extensiones de arena y dunas</p>
-      </div>
-  </div>
-  
-  <!-- Imagen 6 -->
-  <div class="gallery-item" onclick="openModal(5)">
-    <img src="{% static 'img/1.jpeg'%}" alt="Paisaje de montaña">
-      <div class="info">
-          <h3>Lago tranquilo</h3>
-          <p>Aguas calmas rodeadas de vegetación</p>
-      </div>
-  </div>
+ <div class="container">
+    <h1>Galería de Imágenes</h1>
+
+    <div class="gallery">
+        <!-- Imagen 1 -->
+        <div class="gallery-item" data-info='{"title":"Ensalada Fitness","description":"Cuando se trata de cuidarse casamia tiene la mejor opcion para ustdes."}'>
+            <img src="{% static 'img/1.jpeg' %}" alt="Montañas" class="gallery-img">
+            <div class="gallery-title">Ensalada Fitness</div>
+        </div>
+
+
+
+        <div class="gallery-item" data-info='{"title":"Ensalada Fitness","description":"Cuando se trata de cuidarse casamia tiene la mejor opcion para ustdes."}'>
+            <img src="{% static 'img/1.jpeg' %}" alt="Montañas" class="gallery-img">
+            <div class="gallery-title">Ensalada Fitness</div>
+        </div>
+
+
+
+        <div class="gallery-item" data-info='{"title":"Ensalada Fitness","description":"Cuando se trata de cuidarse casamia tiene la mejor opcion para ustdes."}'>
+            <img src="{% static 'img/1.jpeg' %}" alt="Montañas" class="gallery-img">
+            <div class="gallery-title">Ensalada Fitness</div>
+        </div>
+
+
+
+        <div class="gallery-item" data-info='{"title":"Ensalada Fitness","description":"Cuando se trata de cuidarse casamia tiene la mejor opcion para ustdes."}'>
+            <img src="{% static 'img/1.jpeg' %}" alt="Montañas" class="gallery-img">
+            <div class="gallery-title">Ensalada Fitness</div>
+        </div>
+
+
+
+        <div class="gallery-item" data-info='{"title":"Ensalada Fitness","description":"Cuando se trata de cuidarse casamia tiene la mejor opcion para ustdes."}'>
+            <img src="{% static 'img/1.jpeg' %}" alt="Montañas" class="gallery-img">
+            <div class="gallery-title">Ensalada Fitness</div>
+        </div>
+
+
+
+        <div class="gallery-item" data-info='{"title":"Ensalada Fitness","description":"Cuando se trata de cuidarse casamia tiene la mejor opcion para ustdes."}'>
+            <img src="{% static 'img/1.jpeg' %}" alt="Montañas" class="gallery-img">
+            <div class="gallery-title">Ensalada Fitness</div>
+        </div>
+
+        <div class="gallery-item" data-info='{"title":"Ensalada Fitness","description":"Cuando se trata de cuidarse casamia tiene la mejor opcion para ustdes."}'>
+            <img src="{% static 'img/1.jpeg' %}" alt="Montañas" class="gallery-img">
+            <div class="gallery-title">Ensalada Fitness</div>
+        </div>
+
+        <div class="gallery-item" data-info='{"title":"Ensalada Fitness","description":"Cuando se trata de cuidarse casamia tiene la mejor opcion para ustdes."}'>
+            <img src="{% static 'img/1.jpeg' %}" alt="Montañas" class="gallery-img">
+            <div class="gallery-title">Ensalada Fitness</div>
+        </div>
+       
+    </div>
 </div>
 
-<!-- Modal para ver imágenes -->
-<div class="modal" id="imageModal">
-  <span class="close-modal" onclick="closeModal()">&times;</span>
-  <div class="modal-content">
-      <img id="modalImage" src="" alt="">
-      <div class="image-caption">
-          <h3 id="modalTitle"></h3>
-          <p id="modalDescription"></p>
-      </div>
-  </div>
+<!-- Modal de información -->
+<div class="modal" id="infoModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="modal-title" id="modalTitle">Título de la imagen</div>
+            <button class="close-button">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="modal-image-container">
+                <img src="" alt="" class="modal-image" id="modalImage">
+            </div>
+            <div class="modal-info">
+                <h3 class="info-title" id="infoTitle">Título completo</h3>
+                <p class="info-description" id="infoDescription">Descripción detallada de la imagen.</p>
+            </div>
+        </div>
+    </div>
 </div>
-
 
 
 

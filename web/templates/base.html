@@ -6,99 +6,82 @@
     <title>{%block titulo%}  mi sitio {% endblock %}</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
 </head>
 <body>
 
+     <header>
+         <nav>
+             <a href="{% url 'home' %}">
+                 <div class="logo">
+                     <img src="{% static 'img/CASAMIA.jpeg' %}" alt="Logo Restaurante">
+                     <h1 >Restaurante</h1>
+                 </div>
+             </a>
+             
+             <input type="checkbox" id="check">
+             <label for="check" class="checkbtn">
+                 <img src="{% static 'img/casa.png' %}" width="30" height="30" alt="Menu Toggle">
+             </label>
+             
+             <ul class="menu">
+                 <li class="dropdown">
+                     <a href="{% url 'nosotros' %}">Nosotros</a>
+                     <ul class="dropdown-menu">
+                         <li><a href="{% url 'sugerencia' %}">Buzón de sugerencias</a></li>
+                     </ul>
+                 </li>
+                 
+                 <li><a href="{% url 'productos' %}">Menú</a></li>
+                 <li><a href="{% url 'galeria' %}">Galería</a></li>
+                 <li><a href="{% url 'domicilios' %}">Servicios</a></li>
+                 
+                 {% if not user.is_authenticated %}
+                     <li>
+                         <a href="{% url 'login' %}">
+                             <img src="{% static 'img/sesion.png' %}" width="20" height="20" alt="Iniciar Sesión">
+                         </a>
+                     </li>
+                 {% endif %}
 
-    <header>
-        <nav>
-            <a href="{% url 'home' %}">
-                <div class="logo">
-                    <img src="{% static 'img/CASAMIA.jpeg' %}" alt="" >
-                        <h1> Restaurante</h1>
-                </div>
-            </a>
 
-        
+                 {% if user.is_authenticated %}
+                 <li>
+           
+                     <a href="{% url 'ver_carrito' %}" class="icono-login">
+                         <i class="fa-solid fa-cart-shopping"></i>
+                         {% with total_items=request.user.carritoitem_set.count %}
+                             <span class="badge bg-danger">{{ total_items }}</span>
+                         {% endwith %}
+                     </a>
+                 </li>
 
-
-            <input type="checkbox" id="check">
-            <label for="check" class="checkbtn">
-                <img src="{% static 'img/casa.png' %}" width="30px" height="30px">
-            </label>
-            <ul class="menu">
-
-                <li class="dropdown">
-                    <a href="{% url 'nosotros'%}">nosotros</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{% url 'sugerencia'%}">Buzon de sugerencias</a></li>
-                      
-                    </ul>
-                </li>
+                 {% endif %}
+                 
+                 {% if user.is_authenticated %}
+                     <li>
+                         <a href="{% url 'perfil' %}">
+                             <img src="{% static 'img/perfil.png' %}" width="20" height="20" alt="Perfil">
+                         </a>
+                     </li>
+                 {% endif %}
                
-                    
-                <li><a href="{% url 'productos'%}">Carta</a></li>
-                <li><a href="{% url 'galeria'%}">Galeria</a></li>
-
-                <li><a href="{% url 'domicilios'%}">Servicios</a></li>
-                <!-- <li><a href="{% url 'reservacion'%}">Reservas</a></li> -->
-       
-
-
-                {% if not user.is_authenticated %}
-                
-                <li><a href="{% url 'login'%}"><img src="{% static 'img/sesion.png'%}" width="20px" height="20px"></a></li>
-
-                {% endif %}
-            
-                    
-                {% if user.is_authenticated %}
+                 
+                 {% if user.is_authenticated %}
+                     <li>
+                         <a href="{% url 'logout' %}">
+                             <img src="{% static 'img/cerrar.png' %}" width="20" height="20" alt="Cerrar Sesión">
+                         </a>
+                     </li>
+                 {% endif %}
 
 
 
-                    <li><a href="{% url 'perfil'%}"><img src="{% static 'img/perfil.png'%}" width="20px" height="20px"></a></li>
-                    <li><a href="{% url 'carrito' %}"><img src="{% static 'img/carrito.png' %}" width="20px" height="20px"></a></li>
-               
-                    
-
-                {%endif%}
-                {% if user.is_authenticated %}
-                    <li><a href="{% url 'logout' %}"><img src="{% static 'img/cerrar.png' %}" width="20px" height="20px"></a></li>
-                {% endif %}
-
-                {% with total_items=request.user.carritoitem_set.count %}
-                    {% if total_items > 0 %}
-                  
-                        <i class="fa-solid fa-cart-shopping"></i>
-                        <span class="badge bg-danger">{{ total_items }}</span>
-                    </a>
-
-                <li><a href="{% url 'perfil'%}"><img src="{% static 'img/perfil.png'%}" width="20px" height="20px"></a></li>
-                  
-                <li ><a href="">  <img src="{% static 'img/carrito.png' %}"  width="20px" height="20px"></a></li>
-
-
-              
-            </ul>
-
-            <a href="{% url 'logout' %}"><img src="{% static 'img/cerrar.png' %}"  width="20px" height="20px"></a>
-
-                {% endif %}
-                {% endwith %}
-            </ul>
-
-
-              <!-- Otros enlaces de navegación -->
-            
-
-        
-
-
-
-    </header>
-    
-    
+             </ul>
+         </nav>
+     </header>
 
    
 
@@ -128,7 +111,7 @@
                 <p>4:00 pm a 11:00 pm</p>
             </div>
             <div class="social-icons">
-                <h4>comunicate con nosotros</h4>
+                <h4>Comunicate Con Nosotros</h4>
                 <a href="https://www.instagram.com/casamiagarzon/"><img src="{% static 'img/instagram.png' %}"  alt="Instagram"></a>
                 <a href="https://www.facebook.com/search/top?q=casamia%20garzon"><img src="{% static 'img/facebook.png' %}" alt="Facebook"></a>
                 <a href="https://wa.me/message/DQ3EYIZCS24KM1" target="_blank"><img src="{% static 'img/whas.png' %}"></a>
