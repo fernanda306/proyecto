@@ -1,5 +1,5 @@
 from django import forms
-from .models import Sugerencia, orden  # Elimina la importación de Usuario si no existe
+from .models import Sugerencia, Orden  # Elimina la importación de Usuario si no existe
 from django.core.mail import send_mail
 from django.core.validators import RegexValidator
 
@@ -126,7 +126,7 @@ class ReservacionForm(forms.ModelForm):
 
 
 
-class ordenForm(forms.ModelForm):
+class OrdenForm(forms.ModelForm):
     METODOS_PAGO =[
         ('nequi', 'Nequi'),
         ('bancolombia', 'Bancolombia')
@@ -144,7 +144,7 @@ class ordenForm(forms.ModelForm):
 
     class Meta:
 
-        model = orden
+        model = Orden
         fields = ['nombre', 'email', 'telefono', 'metodo_pago']
         widgets = {
            'nombre': forms.TextInput(attrs={'class': 'form-control',

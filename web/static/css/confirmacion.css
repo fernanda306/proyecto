@@ -1,0 +1,96 @@
+ body {
+    font-family: Arial, sans-serif;
+    color: #000000;
+ }
+
+.confirmacion-container {
+    width: 450px;
+    margin-left: 35%;
+    margin-bottom: 5%;
+    background:  rgb(56, 57, 89);
+    padding: 10px;
+    border-radius: 4%;
+    text-align: center;
+
+
+    box-shadow: 0 0 10px white;
+}
+
+.confirmacion-icon {
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+
+.confirmacion-titulo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.confirmacion-mensaje {
+    margin: 15px 0;
+    font-size: 16px;
+    color: #ffffff;
+}
+
+.confirmacion-detalles {
+    text-align: left;
+    margin-top: 20px;
+}
+
+.resumen-titulo {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.confirmacion-datos {
+    background: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.datos-titulo {
+    font-weight: bold;
+    color: #333;
+}
+
+.confirmacion-items {
+    margin-top: 15px;
+    text-align: left;
+}
+
+.confirmacion-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.confirmacion-total {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: right;
+    margin-top: 10px;
+    color: #28a745;
+}
+
+.confirmacion-acciones {
+    margin-top: 20px;
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    display: inline-block;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}

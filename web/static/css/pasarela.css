@@ -1,21 +1,23 @@
 body {
     font-family: Arial, sans-serif;
-  
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
 }
 
-.container {
-    margin-bottom: 10%;
-    max-width: 800px;
-    margin: 20px auto;
-    background: #57246e;
+.checkout-container {
+    max-width: 900px;
+    margin: 50px auto;
+    background: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.titulo {
+.checkout-titulo {
     text-align: center;
-    color: #ffffff;
+    margin-bottom: 20px;
+    color: #333;
 }
 
 .messages {
@@ -24,81 +26,87 @@ body {
 
 .alert {
     padding: 10px;
+    border-radius: 5px;
     margin-bottom: 10px;
-    border-radius: 4px;
 }
 
-.grid {
+.checkout-grid {
     display: flex;
-    gap: 20px;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
-.form {
-    flex: 1;
+.checkout-form, .checkout-resumen {
+    width: 48%;
+}
+
+.form-group {
+    margin-bottom: 15px;
 }
 
 label {
     display: block;
     font-weight: bold;
-    margin-top: 10px;
+    margin-bottom: 5px;
 }
 
 input, select {
     width: 100%;
     padding: 8px;
-    margin-top: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
 
-.form-error {
-    color: red;
-    font-size: 14px;
+.form-check {
+    margin-bottom: 10px;
 }
 
-.boton {
-    display: block;
-    width: 100%;
-    padding: 10px;
+.btn-success {
     background-color: #28a745;
     color: white;
+    padding: 10px;
     border: none;
-    border-radius: 4px;
+    width: 100%;
     cursor: pointer;
-    margin-top: 15px;
+    border-radius: 5px;
+    font-size: 16px;
 }
 
-.boton:hover {
+.btn-success:hover {
     background-color: #218838;
 }
 
-.resumen {
-    flex: 1;
+.checkout-resumen {
     background: #f1f1f1;
     padding: 15px;
     border-radius: 8px;
 }
 
 .resumen-titulo {
-    font-size: 20px;
-    margin-bottom: 10px;
-    color: #333;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
 }
 
-.producto {
+.resumen-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.resumen-producto {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid #ccc;
-    padding: 10px 0;
 }
 
 .resumen-imagen {
     width: 50px;
     height: 50px;
     object-fit: cover;
-    border-radius: 4px;
     margin-right: 10px;
+    border-radius: 5px;
 }
 
 .resumen-total {
@@ -112,14 +120,14 @@ input, select {
     display: block;
     text-align: center;
     padding: 10px;
-    border: 1px solid #007bff;
-    color: #007bff;
-    border-radius: 4px;
+    border: 1px solid #333;
+    color: #333;
     text-decoration: none;
-    margin-top: 15px;
+    border-radius: 5px;
+    margin-top: 10px;
 }
 
 .btn-outline:hover {
-    background-color: #007bff;
+    background: #333;
     color: white;
 }

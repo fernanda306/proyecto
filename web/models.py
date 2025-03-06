@@ -85,7 +85,7 @@ class datos(models.Model):
     
 
 
-class orden (models.Model):
+class Orden(models.Model):
         usuario = models. ForeignKey(User, on_delete=models. CASCADE, null=True, blank=True)
         nombre = models. CharField (max_length=200)
         email = models. EmailField ()
@@ -100,9 +100,9 @@ class orden (models.Model):
             return f"orden #{self.id} - {self.nombre}"
         
 
-class ordenitem(models.Model):
+class OrdenItem(models.Model):
 
-        orden = models.ForeignKey(orden, related_name='items', on_delete=models.CASCADE)
+        orden = models.ForeignKey(Orden, related_name='items', on_delete=models.CASCADE)
         producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
         precio = models.DecimalField(max_digits=10, decimal_places=2)
         cantidad = models.IntegerField(default=1)
@@ -112,3 +112,7 @@ class ordenitem(models.Model):
         
         def subtotal(self):
              return self.precio  * self.cantidad
+
+
+
+

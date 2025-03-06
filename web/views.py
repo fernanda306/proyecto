@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login
 from .forms import SugerenciaForm
-from .models import  carritoitem, Reservacion
+from .models import  carritoitem, Reservacion, datos
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.contrib.auth.tokens import default_token_generator 
@@ -20,8 +20,8 @@ from .models import Producto
 from django.contrib.auth.decorators import login_required
 
 
-from .models import orden, ordenitem, carritoitem
-from .forms import ordenForm
+from .models import Orden, OrdenItem, carritoitem
+from .forms import OrdenForm
 
 logger = logging.getLogger(__name__)
 
@@ -359,90 +359,85 @@ def eliminar_item(request, item_id):
 
 
 
+
+
+
 def pasarela(request):
-    carritoitem =[]
+    carrito_items = []
     total = 0
 
+    # Verificar si el usuario está autenticado o si hay una sesión activa
     if request.user.is_authenticated:
-
         carrito_items = carritoitem.objects.filter(usuario=request.user)
+    elif request.session.session_key:
+        carrito_items = carritoitem.objects.filter(sesion_id=request.session.session_key)
 
-    else:
-        if request.session.session_key:
-            carrito_items = carritoitem.objects.filter(sesion_id=request.session.session_key)
-
-
-# Si el carrito está vacío, mostrar advertencia
-    if not carrito_items:
+    # Si el carrito está vacío, mostrar advertencia y redirigir
+    if not carrito_items.exists():
         messages.warning(request, "Tu carrito está vacío")
         return redirect('ver_carrito')
-    
-
 
     # Calcular el total del pedido
     for item in carrito_items:
         total += item.subtotal()
 
     if request.method == 'POST':
-            form = ordenForm(request.POST)
-            metodo_pago = request.POST.get('metodo_pago')
+        form = OrdenForm(request.POST)
+        metodo_pago = request.POST.get('metodo_pago')
 
-    if form.is_valid() and metodo_pago:
-        orden = form.save(commit=False)
+        if form.is_valid() and metodo_pago:
+            orden = form.save(commit=False)
 
-        if request.user.is_authenticated:
-            orden.usuario = request.user
-        else:
-            orden.sesion_id = request.session.session_key
+            if request.user.is_authenticated:
+                orden.usuario = request.user
+            else:
+                orden.sesion_id = request.session.session_key
 
             orden.total = total
             orden.metodo_pago = metodo_pago
             orden.save()
 
-# Guardar los productos en la orden
-        for item in carrito_items:
-            ordenitem.objects.create(
-                orden=orden,
-                producto=item.producto,
-                precio=item.producto.precio,
-                cantidad=item.cantidad
-    )
-# Vaciar el carrito después del pago
+            # Guardar los productos en la orden
+            for item in carrito_items:
+                OrdenItem.objects.create(
+                    orden=orden,
+                    producto=item.producto,
+                    precio=item.producto.precio,
+                    cantidad=item.cantidad
+                )
+
+            # Vaciar el carrito después del pago
             carrito_items.delete()
 
-
-        # 📧 Enviar el correo de confirmación
+            # 📧 Enviar el correo de confirmación
             enviar_correo_confirmacion(orden)
             messages.success(request, "Tu pedido ha sido procesado con éxito")
             return redirect('confirmar', orden_id=orden.id)
         else:
-              messages.error(request, "Por favor selecciona un método de pago válido.")
+            messages.error(request, "Por favor selecciona un método de pago válido.")
     else:
-
-# Precargar los datos del usuario en el formulario
+        # Precargar los datos del usuario en el formulario
         initial_data = {}
         if request.user.is_authenticated:
             try:
-                datos = datos.objects.get(usuario=request.user)
+                datos_usuario = datos.objects.get(usuario=request.user)
                 initial_data = {
-                        'nombre': f"{datos.nombre} {datos.apellido}",
-                        'email': request.user.email
+                    'nombre': f"{datos_usuario.nombre} {datos_usuario.apellido}",
+                    'email': request.user.email
                 }
-
             except datos.DoesNotExist:
                 initial_data = {
                     'nombre': request.user.username,
                     'email': request.user.email
                 }
 
+        form = OrdenForm(initial=initial_data)
 
-            form = ordenForm(initial=initial_data)
     return render(request, 'pasarela.html', {
         'form': form,
         'carrito_items': carrito_items,
         'total': total
-        })
-
+    })
 
 
 
@@ -457,17 +452,25 @@ def pasarela(request):
 def confirmacion(request, orden_id):
     try:
         if request.user.is_authenticated:
-            orden = orden.objects.get(id=orden_id, usuario=request.user)
+            orden = Orden.objects.get(id=orden_id, usuario=request.user)
         else:
-                orden = orden.objects.get(id=orden_id,
-sesion_id=request.session.session_key)
-        items = ordenitem.objects.filter(orden=orden)
-
-        return render(request, 'confirmar.html',{  'orden': orden, 'items': items})
+            orden = Orden.objects.get(id=orden_id, sesion_id=request.session.session_key)
+        
+        # Obtener los items de la orden en ambos casos
+        items = OrdenItem.objects.filter(orden=orden)
+        
+        return render(request, 'confirmacion.html', {
+            'orden': orden,
+            'items': items
+        })
+    except Orden.DoesNotExist:
+        # Manejar el caso donde la orden no existe
+        messages.error(request, "No se encontró la orden especificada.")
+        return redirect('home')  # O redirigir a donde sea apropiado
     
 
 
-    except orden.DoesNotExist:
+    except Orden.DoesNotExist:
         messages.error(request, "Orden no encontrada")
         return redirect('productos')
     
@@ -486,7 +489,7 @@ def enviar_correo_confirmacion(orden):
         📦 *Productos Comprados*:
         """
 # Agregar productos al mensaje
-    items = ordenitem.objects.filter(orden=orden)
+    items = OrdenItem.objects.filter(orden=orden)
     for item in items:
         mensaje += f"\n - {item.cantidad} x {item.producto.nombre} (${item.precio} c/u)"
      
@@ -501,6 +504,3 @@ def enviar_correo_confirmacion(orden):
     )
 
 
-    
-def pasarela(request):
-    return render(request, 'pasarela.html')
