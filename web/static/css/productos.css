@@ -189,19 +189,21 @@ p {
 .producto-card h2 {
     font-size: 18px;
     margin: 10px 0;
-    color: #333;
+    color: #000000;
 }
 
 .producto-card p {
     font-size: 14px;
-    color: #666;
+    color: #000000;
     flex-grow: 1;
+    text-align: justify;
 }
 
 .precio {
     font-weight: bold;
     color: #000000;
-    margin: 10px 0;
+    margin: 15px;
+    text-align: center;
 }
 
 .producto-card form {

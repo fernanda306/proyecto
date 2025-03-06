@@ -23,7 +23,8 @@
                 {% endif %}
                 <h2>{{ producto.nombre }}</h2>
                 <p>{{ producto.caracteristicas }}</p>
-                <p class="precio">${{ producto.precio }}</p>
+                <p class="precio" style="text-align: center;">{{ producto.precio }}</p>
+
 				<form method="POST" action="{% url 'productos' %}">
 					{% csrf_token %}
 					<input type="hidden" name="producto_id" value="{{ producto.id }}">
