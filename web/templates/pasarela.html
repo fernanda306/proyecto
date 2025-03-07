@@ -74,16 +74,17 @@ Electrónico</label>
             <h2 class="resumen-titulo">Resumen del Pedido</h2> 
              
             {% for item in carrito_items %} 
-            <div class="resumen-item"> 
+             <div class="resumen-item"> 
                 <div class="resumen-producto"> 
-                    <img src="{{ item.producto.foto.url }}" alt="{{ item.producto.nombre }}" class="resumen-imagen"> 
+                    <img src="{{ item.producto.imagen.url }}" alt="{{ item.producto.nombre }}" class="resumen-imagen"> 
                     <div> 
                         <div>{{ item.producto.nombre }}</div> 
                         <div>Cantidad: {{ item.cantidad }}</div> 
                     </div> 
                 </div> 
                 <div>${{ item.subtotal }}</div> 
-            </div> 
+            </div>  
+            
             {% endfor %} 
              
             <div class="resumen-total"> 

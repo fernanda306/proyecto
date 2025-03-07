@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
+   
     margin: 0;
     padding: 0;
 }
@@ -8,16 +8,16 @@ body {
 .checkout-container {
     max-width: 900px;
     margin: 50px auto;
-    background: #fff;
+    background:  rgb(168, 172, 252)1;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px white;
 }
 
 .checkout-titulo {
     text-align: center;
     margin-bottom: 20px;
-    color: #333;
+    color: #f6f6f6;
 }
 
 .messages {
@@ -42,6 +42,7 @@ body {
 
 .form-group {
     margin-bottom: 15px;
+    color: #ffffff;
 }
 
 label {
@@ -62,7 +63,7 @@ input, select {
 }
 
 .btn-success {
-    background-color: #28a745;
+    background: #825bbf;
     color: white;
     padding: 10px;
     border: none;
@@ -73,11 +74,13 @@ input, select {
 }
 
 .btn-success:hover {
-    background-color: #218838;
+    background: #9f8dd1;
+
+    
 }
 
 .checkout-resumen {
-    background: #f1f1f1;
+    background: #67567b;
     padding: 15px;
     border-radius: 8px;
 }
@@ -120,14 +123,18 @@ input, select {
     display: block;
     text-align: center;
     padding: 10px;
-    border: 1px solid #333;
-    color: #333;
+    border: 1px solid #ffffff;
+    color: #ffffff;
     text-decoration: none;
     border-radius: 5px;
     margin-top: 10px;
 }
 
 .btn-outline:hover {
-    background: #333;
+    background: #9f8dd1;
     color: white;
+}
+
+h2{
+    color: #ffffff;
 }
