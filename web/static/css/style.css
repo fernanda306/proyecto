@@ -15,7 +15,7 @@ body {
 
 
 header {
-    background-color: rgba(35, 36, 57, 1);
+    /* background-color: rgba(35, 36, 57, 1); */
     padding: 20px;
 }
 
@@ -85,7 +85,7 @@ nav {
 }
 
 .dropdown-menu {
-     display: none; 
+    display: none; 
     position: absolute;
     background-color: #46304d;
     /* min-width: 5px; */
@@ -177,6 +177,9 @@ nav {
         left: 0;
     }
 }
+
+
+
 
 
 
