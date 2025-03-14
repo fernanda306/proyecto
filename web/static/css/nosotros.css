@@ -68,6 +68,7 @@ justify-content: center;
   padding-left: 3%;
    margin-top: 5%;
    margin-bottom: 10%;
+   margin-left: 4%;
 }
 h2{
 
@@ -164,6 +165,7 @@ p a:hover {
   margin-left: 5%;
   width: 50%;
   max-width: 900px;
+  border-radius: 15px;
 }
 
 .section {
@@ -243,6 +245,7 @@ h2 {
   flex-direction: row-reverse;
   margin-left: 45%;
   width: 50%;
+  border-radius: 15px;
   max-width: 900px;
 }
 
@@ -335,6 +338,24 @@ h2 {
   .container1 {
     width: 90%;
     padding: 30px;
+    text-align: center;
+   
+  }
+
+  /* iframe{
+
+    margin-left: 30%;
+    border-radius: 30PX;
+    display: flex;
+    justify-content: center;
+  } */
+
+  .map {
+    margin-top: 5px;
+    margin-bottom: 10%;
+    width: 90%; /* El mapa ocupa el 100% del ancho disponible */
+    height: 80%; /* Puedes ajustar la altura si lo deseas */
+    margin: 0 auto; /* Centra horizontalmente */
   }
 
   .container2, .container3 {
@@ -376,5 +397,18 @@ h2 {
 
   .section-text, .text {
     padding: 0;
+  }
+  
+  /* iframe{
+    align-items: center;
+    border-radius: 30PX;
+  } */
+
+  .map {
+    margin-top: 5px;
+    margin-bottom: 10%;
+    width: 90%; /* El mapa ocupa el 100% del ancho disponible */
+    height: 80%; /* Puedes ajustar la altura si lo deseas */
+    margin: 0 auto; /* Centra horizontalmente */
   }
 }
