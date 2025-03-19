@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+
+{% block title %} inicio {%endblock%}
+{% block content %}
+
+{% load static %}
+
+
+<link rel="stylesheet" href="{% static 'css/historial.css'%}">
+
+
+
+
+
+
+<div class="historial-container">
+    <h1 class="historial-titulo">Historial de Compras</h1>
+    
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    
+    {% if pedidos %}
+    <div class="historial-grid">
+        {% for pedido in pedidos %}
+        <div class="pedido-card">
+            <div class="pedido-header">
+                <h2 class="pedido-titulo">Pedido #{{ pedido.id }}</h2>
+                <div class="pedido-fecha">{{ pedido.fecha_creacion|date:"d/m/Y H:i" }}</div>
+                <div class="pedido-estado {{ pedido.estado|lower }}">{{ pedido.estado }}</div>
+            </div>
+            
+            <div class="pedido-detalles">
+                <h3 class="resumen-titulo">Productos</h3>
+                {% for item in pedido.items.all %}
+                <div class="resumen-item">
+                    <div class="resumen-producto">
+                        <img src="{{ item.producto.imagen.url }}" alt="{{ item.producto.nombre }}" class="resumen-imagen">
+                        <div>
+                            <div>{{ item.producto.nombre }}</div>
+                            <div>Cantidad: {{ item.cantidad }}</div>
+                        </div>
+                    </div>
+                    <div>${{ item.subtotal }}</div>
+                </div>
+                {% endfor %}
+                
+                <div class="resumen-total">
+                    Total: ${{ pedido.total }}
+                </div>
+            </div>
+            
+            <div class="pedido-contacto">
+                <h3 class="resumen-titulo">Datos de Contacto</h3>
+                <div class="contacto-info">
+                    <div><strong>Nombre:</strong> {{ pedido.nombre }}</div>
+                    <div><strong>Email:</strong> {{ pedido.email }}</div>
+                    <div><strong>Teléfono:</strong> {{ pedido.telefono }}</div>
+                    <div><strong>Método de pago:</strong> {{ pedido.metodo_pago }}</div>
+                </div>
+            </div>
+            
+            {% if pedido.estado == 'Pendiente' %}
+            <div class="pedido-acciones">
+                <form method="POST" action="{% url 'cancelar_pedido' pedido.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline">
+                        Cancelar Pedido
+                    </button>
+                </form>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    
+    {% else %}
+    <div class="historial-vacio">
+        <p>No tienes compras realizadas.</p>
+        <a href="{% url 'productos' %}" class="btn btn-success">
+            Ver Productos
+        </a>
+    </div>
+    {% endif %}
+</div>
+
+
+
+
+    {% endblock %}

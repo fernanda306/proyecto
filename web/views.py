@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login
 from .forms import SugerenciaForm
-from .models import  carritoitem, Reservacion, datos
+from .models import  carritoitem, Reservacion, datos, pedido
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.contrib.auth.tokens import default_token_generator 
@@ -156,7 +156,6 @@ def productos(request):
 
 
 
-from .models import Producto, carritoitem
 def productos(request):
     producto_lista = Producto.objects.all()
 
@@ -359,62 +358,70 @@ def eliminar_item(request, item_id):
 
 
 
-
-
-
 def pasarela(request):
     carrito_items = []
     total = 0
-
+    
     # Verificar si el usuario está autenticado o si hay una sesión activa
     if request.user.is_authenticated:
         carrito_items = carritoitem.objects.filter(usuario=request.user)
     elif request.session.session_key:
         carrito_items = carritoitem.objects.filter(sesion_id=request.session.session_key)
-
+    
     # Si el carrito está vacío, mostrar advertencia y redirigir
     if not carrito_items.exists():
         messages.warning(request, "Tu carrito está vacío")
         return redirect('ver_carrito')
-
+    
     # Calcular el total del pedido
     for item in carrito_items:
         total += item.subtotal()
-
+    
     if request.method == 'POST':
         form = OrdenForm(request.POST)
         metodo_pago = request.POST.get('metodo_pago')
-
-        if form.is_valid() and metodo_pago:
+        
+        if form.is_valid():
             orden = form.save(commit=False)
-
+            
             if request.user.is_authenticated:
                 orden.usuario = request.user
             else:
                 orden.sesion_id = request.session.session_key
-
+            
             orden.total = total
-            orden.metodo_pago = metodo_pago
-            orden.save()
-
-            # Guardar los productos en la orden
-            for item in carrito_items:
-                OrdenItem.objects.create(
-                    orden=orden,
-                    producto=item.producto,
-                    precio=item.producto.precio,
-                    cantidad=item.cantidad
-                )
-
-            # Vaciar el carrito después del pago
-            carrito_items.delete()
-
-            # 📧 Enviar el correo de confirmación
-            enviar_correo_confirmacion(orden)
-            messages.success(request, "Tu pedido ha sido procesado con éxito")
-            return redirect('confirmar', orden_id=orden.id)
+            
+            # Verificar si se seleccionó un método de pago
+            if metodo_pago:
+                orden.metodo_pago = metodo_pago
+                
+                # Si es contraentrega, establecer estado específico
+                if metodo_pago == 'contraentrega':
+                    orden.estado = 'pendiente'
+                
+                orden.save()
+                
+                # Guardar los productos en la orden
+                for item in carrito_items:
+                    OrdenItem.objects.create(
+                        orden=orden,
+                        producto=item.producto,
+                        precio=item.producto.precio,
+                        cantidad=item.cantidad
+                    )
+                
+                # Vaciar el carrito después del pago
+                carrito_items.delete()
+                
+                # 📧 Enviar el correo de confirmación
+                enviar_correo_confirmacion(orden)
+                
+                messages.success(request, "Tu pedido ha sido procesado con éxito")
+                return redirect('confirmar', orden_id=orden.id)
+            else:
+                messages.error(request, "Por favor selecciona un método de pago válido.")
         else:
-            messages.error(request, "Por favor selecciona un método de pago válido.")
+            messages.error(request, "Por favor verifica los datos del formulario.")
     else:
         # Precargar los datos del usuario en el formulario
         initial_data = {}
@@ -430,15 +437,14 @@ def pasarela(request):
                     'nombre': request.user.username,
                     'email': request.user.email
                 }
-
+        
         form = OrdenForm(initial=initial_data)
-
+    
     return render(request, 'pasarela.html', {
         'form': form,
         'carrito_items': carrito_items,
         'total': total
     })
-
 
 
 
@@ -504,3 +510,61 @@ def enviar_correo_confirmacion(orden):
     )
 
 
+
+
+# def historial(request):
+#     return render (request, 'historial.html')
+
+
+
+@login_required
+def historial(request):
+    """
+    Vista para mostrar el historial de compras del usuario actual.
+    Requiere que el usuario esté logueado.
+    """
+    # Obtener todos los pedidos del usuario actual
+    pedidos = pedido.objects.filter(usuario=request.user).order_by('-fecha_creacion')
+    
+    return render(request, 'historial.html', {
+        'pedidos': pedidos,
+    })
+
+@login_required
+def cancelar_pedido(request, pedido_id):
+    """
+    Vista para cancelar un pedido pendiente.
+    Solo permite cancelar pedidos en estado 'Pendiente'.
+    """
+    if request.method == 'POST':
+        # Obtener el pedido o devolver un 404 si no existe
+        pedido_obj = get_object_or_404(pedido, id=pedido_id, usuario=request.user)
+        
+        # Verificar si el pedido está en estado pendiente
+        if pedido_obj.estado == 'Pendiente':
+            pedido_obj.estado = 'Cancelado'
+            pedido_obj.save()
+            messages.success(request, 'Pedido cancelado exitosamente.')
+        else:
+            messages.error(request, 'Este pedido no puede ser cancelado porque no está en estado pendiente.')
+        
+        return redirect('historial')
+    
+    # Si no es una solicitud POST, redirigir al historial
+    return redirect('historial')
+
+# Vista opcional para ver detalles de un pedido específico
+@login_required
+def detalle_pedido(request, pedido_id):
+    """
+    Vista para mostrar los detalles de un pedido específico.
+    """
+    pedido_obj = get_object_or_404(pedido, id=pedido_id, usuario=request.user)
+    
+    return render(request, 'web/detalle_pedido.html', {
+        'pedido': pedido_obj,
+    })
+
+
+def manual(request):
+    return render (request, 'manual.html')

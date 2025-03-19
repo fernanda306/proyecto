@@ -1,0 +1,136 @@
+.historial-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.historial-titulo {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.historial-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.pedido-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.pedido-header {
+    padding: 1.5rem;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.pedido-titulo {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.pedido-fecha {
+    color: #6c757d;
+}
+
+.pedido-estado {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.pedido-estado.pendiente {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.pedido-estado.completado {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.pedido-estado.cancelado {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.pedido-detalles, .pedido-contacto {
+    padding: 1.5rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.resumen-titulo {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.resumen-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.resumen-item:last-child {
+    border-bottom: none;
+}
+
+.resumen-producto {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.resumen-imagen {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.resumen-total {
+    margin-top: 1rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-align: right;
+}
+
+.contacto-info {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+}
+
+.pedido-acciones {
+    padding: 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.historial-vacio {
+    text-align: center;
+    padding: 3rem 0;
+}
+
+.historial-vacio p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    color: #6c757d;
+}
+
+@media (min-width: 768px) {
+    .contacto-info {
+        grid-template-columns: 1fr 1fr;
+    }
+}

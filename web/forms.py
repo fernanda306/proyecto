@@ -126,31 +126,61 @@ class ReservacionForm(forms.ModelForm):
 
 
 
+# class OrdenForm(forms.ModelForm):
+#     METODOS_PAGO =[
+#         ('nequi', 'Nequi'),
+#         ('bancolombia', 'Bancolombia'),
+#         ('contraentrega','Contraentrega')
+
+#     ]
+
+
+#     metodo_pago = forms.ChoiceField(
+
+#         choices=METODOS_PAGO,
+#         widget=forms.RadioSelect,
+#         required=True
+
+#     )
+
+#     class Meta:
+
+#         model = Orden
+#         fields = ['nombre', 'email', 'telefono', 'metodo_pago']
+#         widgets = {
+#            'nombre': forms.TextInput(attrs={'class': 'form-control',
+#     'placeholder': 'Tu nombre completo'}),
+#             'email': forms.EmailInput(attrs={'class': 'form-control',
+#     'placeholder': 'tucorreo@ejemplo.com'}),
+#             'telefono': forms.TextInput(attrs={'class': 'form-control',
+#     'placeholder': 'Tu número de teléfono'})
+# }
+
 class OrdenForm(forms.ModelForm):
-    METODOS_PAGO =[
+    METODOS_PAGO = [
         ('nequi', 'Nequi'),
-        ('bancolombia', 'Bancolombia')
-
+        ('bancolombia', 'Bancolombia'),
+        ('contraentrega', 'Contraentrega')
     ]
-
-
+    
+    # Remove this field definition if it's already defined in your model with the same choices
+    # Or ensure it exactly matches your model's field
     metodo_pago = forms.ChoiceField(
-
         choices=METODOS_PAGO,
         widget=forms.RadioSelect,
         required=True
-
     )
-
+    
     class Meta:
-
         model = Orden
         fields = ['nombre', 'email', 'telefono', 'metodo_pago']
+        # rest of your code...
+
         widgets = {
-           'nombre': forms.TextInput(attrs={'class': 'form-control',
-    'placeholder': 'Tu nombre completo'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control',
-    'placeholder': 'tucorreo@ejemplo.com'}),
-            'telefono': forms.TextInput(attrs={'class': 'form-control',
-    'placeholder': 'Tu número de teléfono'})
-}
+            'nombre': forms.TextInput(attrs={'class': 'form-control',
+     'placeholder': 'Tu nombre completo'}),
+             'email': forms.EmailInput(attrs={'class': 'form-control',
+     'placeholder': 'tucorreo@ejemplo.com'}),
+             'telefono': forms.TextInput(attrs={'class': 'form-control',
+     'placeholder': 'Tu número de teléfono'})
+ }

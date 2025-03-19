@@ -114,5 +114,48 @@ class OrdenItem(models.Model):
              return self.precio  * self.cantidad
 
 
+from django.db import models
+from django.contrib.auth.models import User
 
+# Asegúrate de que el modelo Producto exista en tu aplicación
+# class Producto(models.Model):
+#     ...
 
+class pedido(models.Model):
+    ESTADO_CHOICES = (
+        ('Pendiente', 'Pendiente'),
+        ('Completado', 'Completado'),
+        ('Cancelado', 'Cancelado'),
+    )
+    
+    METODO_PAGO_CHOICES = (
+        ('Efectivo', 'Efectivo'),
+        ('Tarjeta', 'Tarjeta de Crédito/Débito'),
+        ('Transferencia', 'Transferencia Bancaria'),
+    )
+    
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE, related_name='pedidos')
+    nombre = models.CharField(max_length=255)
+    email = models.EmailField()
+    telefono = models.CharField(max_length=20)
+    metodo_pago = models.CharField(max_length=20, choices=METODO_PAGO_CHOICES)
+    estado = models.CharField(max_length=20, choices=ESTADO_CHOICES, default='Pendiente')
+    total = models.DecimalField(max_digits=10, decimal_places=2)
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f"Pedido #{self.id} - {self.nombre}"
+
+class PedidoItem(models.Model):
+    pedido = models.ForeignKey(pedido, related_name='items', on_delete=models.CASCADE)
+    producto = models.ForeignKey('Producto', on_delete=models.CASCADE)
+    cantidad = models.PositiveIntegerField(default=1)
+    precio_unitario = models.DecimalField(max_digits=10, decimal_places=2)
+    subtotal = models.DecimalField(max_digits=10, decimal_places=2)
+    
+    def __str__(self):
+        return f"{self.cantidad} x {self.producto.nombre}"
+    
+    def save(self, *args, **kwargs):
+        self.subtotal = self.precio_unitario * self.cantidad
+        super().save(*args, **kwargs)

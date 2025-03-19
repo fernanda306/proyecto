@@ -56,4 +56,12 @@ urlpatterns = [
     path('pasarela/', views.pasarela, name='pasarela'),
     path('confirmacion/<int:orden_id>/', views.confirmacion, name='confirmar'),
 
+
+     path('historial/', views.historial, name='historial'),
+    path('cancelar-pedido/<int:pedido_id>/', views.cancelar_pedido, name='cancelar_pedido'),
+    path('detalle-pedido/<int:pedido_id>/', views.detalle_pedido, name='detalle_pedido'),  # Opcional
+
+
+     path('manual', views.manual, name='manual'),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

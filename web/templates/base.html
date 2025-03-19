@@ -31,12 +31,14 @@
                      <a href="{% url 'nosotros' %}">Nosotros</a>
                      <ul class="dropdown-menu">
                          <li><a href="{% url 'sugerencia' %}">Buzón de sugerencias</a></li>
+                         <li><a href="{% url 'manual' %}">Manual de usúario</a></li>
                      </ul>
                  </li>
                  
                  <li><a href="{% url 'productos' %}">Menú</a></li>
                  <li><a href="{% url 'galeria' %}">Galería</a></li>
                  <li><a href="{% url 'domicilios' %}">Servicios</a></li>
+                 <li><a href="{% url 'historial' %}">historial</a></li>
                  
                  {% if not user.is_authenticated %}
                      <li>
