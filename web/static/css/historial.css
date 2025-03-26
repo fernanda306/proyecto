@@ -11,11 +11,12 @@
 /* Contenedor de la tabla */
 .table-container {
     overflow-x: auto;
-    background: #a72e2e;
+    background: #ffffff;
     padding: 30px;
     border-radius: 0 0 15px 15px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
     border-top: 2px solid #4c4a4c;
+    color: black;
 }
 
 /* Tabla */
@@ -40,7 +41,7 @@
 }
 
 .ordenes-table tr:nth-child(even) {
-    background-color: #270638;
+    background-color: #3498db;
 }
 
 .ordenes-table tr:hover {
@@ -70,7 +71,7 @@
 }
 
 .rechazado {
-    background-color: #691e69;
+    background-color: #d40606;
     color: white;
     box-shadow: 0 2px 6px rgba(220, 53, 69, 0.2);
 }
@@ -112,7 +113,7 @@
 /* Contenedor de la tabla */
 .table-container {
     overflow-x: auto;
-    background: #a72e2e;
+    background: #ffffff;
     padding: 30px;
     border-radius: 0 0 15px 15px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
@@ -135,7 +136,7 @@
 }
 
 .ordenes-table th {
-    background-color: #3d1465;
+    background-color: #563d63;
     color: white;
     font-weight: 600;
 }
