@@ -195,6 +195,8 @@ def productos(request):
     
     return render(request, 'productos.html', {'productos': producto_lista})
 
+    
+
 
 
 
@@ -513,57 +515,35 @@ def enviar_correo_confirmacion(orden):
 
 
 # def historial(request):
-#     return render (request, 'historial.html')
+#      return render (request, 'historial.html')
 
 
-
-@login_required
 def historial(request):
-    """
-    Vista para mostrar el historial de compras del usuario actual.
-    Requiere que el usuario esté logueado.
-    """
-    # Obtener todos los pedidos del usuario actual
-    pedidos = pedido.objects.filter(usuario=request.user).order_by('-fecha_creacion')
+    # Filter by date if provided
+    fecha_inicio = request.GET.get('fecha_inicio')
+    fecha_fin = request.GET.get('fecha_fin')
     
-    return render(request, 'historial.html', {
-        'pedidos': pedidos,
-    })
+    # Get user's orders
+    ordenes = Orden.objects.filter(usuario=request.user)
+    
+    # Apply date filters if provided
+    if fecha_inicio:
+        ordenes = ordenes.filter(fecha_creacion__gte=fecha_inicio)
+    if fecha_fin:
+        ordenes = ordenes.filter(fecha_creacion__lte=fecha_fin)
+    
+    # Order by date (newest first)
+    ordenes = ordenes.order_by('-fecha_creacion')
+    
+    context = {
+        'ordenes': ordenes,
+        'fecha_inicio': fecha_inicio,
+        'fecha_fin': fecha_fin
+    }
+    
+    return render(request, 'historial.html', context)
 
-@login_required
-def cancelar_pedido(request, pedido_id):
-    """
-    Vista para cancelar un pedido pendiente.
-    Solo permite cancelar pedidos en estado 'Pendiente'.
-    """
-    if request.method == 'POST':
-        # Obtener el pedido o devolver un 404 si no existe
-        pedido_obj = get_object_or_404(pedido, id=pedido_id, usuario=request.user)
-        
-        # Verificar si el pedido está en estado pendiente
-        if pedido_obj.estado == 'Pendiente':
-            pedido_obj.estado = 'Cancelado'
-            pedido_obj.save()
-            messages.success(request, 'Pedido cancelado exitosamente.')
-        else:
-            messages.error(request, 'Este pedido no puede ser cancelado porque no está en estado pendiente.')
-        
-        return redirect('historial')
-    
-    # Si no es una solicitud POST, redirigir al historial
-    return redirect('historial')
 
-# Vista opcional para ver detalles de un pedido específico
-@login_required
-def detalle_pedido(request, pedido_id):
-    """
-    Vista para mostrar los detalles de un pedido específico.
-    """
-    pedido_obj = get_object_or_404(pedido, id=pedido_id, usuario=request.user)
-    
-    return render(request, 'web/detalle_pedido.html', {
-        'pedido': pedido_obj,
-    })
 
 
 def manual(request):

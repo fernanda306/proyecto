@@ -21,6 +21,9 @@ class Producto(models.Model):
         return f"{self.nombre} - ${self.precio}"
     
 
+
+    
+
 class Sugerencia(models.Model):
     username = models.CharField(max_length=100)
     email = models.EmailField()
