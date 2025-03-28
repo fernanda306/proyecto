@@ -116,6 +116,12 @@ body {
   --white: #ffffff;
 }
 
+@media screen and (max-width: 1172px) {
+  .principal {
+    height: 100%;
+    width: 96%;
+}
+}
 /* Extra Small Devices (Smartphones, < 576px) */
 @media screen and (max-width: 575px) {
   .container2, .container3, .principal {
@@ -163,6 +169,11 @@ body {
     height: 400px;
     width: 100%;
 }
+
+  .principal {
+      height: 100%;
+      width: 96%;
+  }
 }
 
 
@@ -181,6 +192,11 @@ body {
       height: auto;
       order: -1;
   }
+
+  .principal {
+    height: 100%;
+    width: 96%;
+}
 }
 
 @media screen and (max-width: 768px) {
@@ -196,6 +212,11 @@ body {
   .map {
       height: 400px;
   }
+
+  .principal {
+    height: 100%;
+    width: 96%;
+}
 }
 
 @media screen and (max-width: 575px) {
@@ -230,4 +251,9 @@ body {
   .map {
       height: 300px;
   }
+
+  .principal {
+    height: 100%;
+    width: 96%;
+}
 }
