@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+ {% extends 'base.html' %}
 {% load static %}
 {% block title%}Carrito{% endblock %}
 
@@ -8,7 +8,9 @@
 
 <link rel="stylesheet" href="{% static 'css/carrito.css' %}">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
+ 
+
 
 <div class="carrito-container">
     <h1 class="carrito-titulo">Tu carrito de compras</h1>
@@ -20,73 +22,75 @@
             {{ message }}
         </div>
         {% endfor %}
-</div>
-{% endif %}
+    </div>
+    {% endif %}
 
-{% if carrito_items %}
-<div class="table-responsive">
-    <table class="carrito-tabla">
-        <thead>
-            <tr>
-                <th>Producto</th>
-                <th>Cantidad</th>
-                <th>Precio</th>
-                <th>subtotal</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in carrito_items %}
-            <tr>
-                <td>
-                    <div class="Producto-info">
-                        <img src="{{ item.producto.imagen.url }}" alt="{{ item.producto.nombre }}" class="Producto-img" width="200px" height="200px">
+    {% if carrito_items %}
+    <div class="tabla">
+        <table class="tabla1">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Subtotal</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in carrito_items %}
+                <tr>
+                    <td>
+                        <div class="Producto">
+                            <img src="{{ item.producto.imagen.url }}" 
+                                 alt="{{ item.producto.nombre }}" 
+                                 class="Producto-img">
                             <span>{{ item.producto.nombre }}</span>
-                    </div>
-                </td>${{ item.producto.precio }}</td>
-                <td>
-                    <form method="POST" action="{% url 'actualizar_carrito' item.id %}" class="cantidad-control">
-                        {% csrf_token %}
-                        <input type="number" name="cantidad" value="{{ item.cantidad }}" min="1" class="cantidad-input">
-                        <button type="submit" class="btn btn-outline btn-sm" aria-label="actualizar cantidad">
-                            Actualizar
-                        </button>
-                    </form>
-                </td>
-                <td>${{ item.subtotal }}</td>
-                <td>
-                    <a href="{% url 'eliminar_item' item.id %}" class="btn btn-danger btn-sm">
-                        Eliminar
-                    </a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="3" class="carrito-total">Total:</td>
-                <td colspan="2" class="carrito-total">${{ total }}</td>
-            </tr>
-        </tfoot>
-    </table>
+                        </div>
+                    </td>
+                    <td>${{ item.producto.precio }}</td>
+                    <td>
+                        <form method="POST" action="{% url 'actualizar_carrito' item.id %}" class="control">
+                            {% csrf_token %}
+                            <input type="number" name="cantidad" value="{{ item.cantidad }}" min="1" class="cantidad">
+                            <button type="submit" class="actualizar" aria-label="actualizar cantidad">
+                                Actualizar
+                            </button>
+                        </form>
+                    </td>
+                    <td>${{ item.subtotal }}</td>
+                    <td>
+                        <a href="{% url 'eliminar_item' item.id %}" class="elimiar">
+                            Eliminar
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" class="total">Total:</td>
+                    <td colspan="2" class="total">${{ total }}</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <div class="carrito3">
+        <a href="{% url 'productos' %}" class="continuar" title="seguir explorando productos">
+            Continuar comprando
+        </a>
+        <a href="{% url 'pasarela' %}" class="pago" title="proceder al pago">
+            Proceder al pago
+        </a>
+    </div>
+    {% else %}
+    <div class="vacio">
+        Tu carrito de compras está vacío. 
+        <a href="{% url 'productos' %}">Empieza a comprar</a>
+    </div>
+    {% endif %}
 </div>
-
-<div class="carrito-acciones">
-    <a href="{% url 'productos' %}" class="btn btn-secondary" title="seguir explorando productos">
-        continuar comprando
-    </a>
-    <a href="{% url 'pasarela' %}" class="btn w-100"
-    style="  background: #825bbf; color: white; padding: 10px; border-radius: 5px; text-align: center;">
-        Proceder al pago
-</a>    
-
-    </a>
-</div>
-{% else %}
-<div class="carrito-vacio">
-    Tu carrito de compras está vacío. <a href="{% url 'productos' %}" Empieza a comprar</a>
-</div>
-{% endif %} 
+{% endblock %} 
 
 
-{% endblock %}

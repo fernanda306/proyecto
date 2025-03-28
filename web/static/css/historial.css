@@ -35,7 +35,7 @@
 }
 
 .ordenes-table th {
-    background-color: #3d1465;
+    background-color: #c1bfc3;
     color: white;
     font-weight: 600;
 }
@@ -142,7 +142,7 @@
 }
 
 .ordenes-table tr:nth-child(even) {
-    background-color: #270638;
+    background-color: #d8d2db;
 }
 
 .ordenes-table tr:hover {

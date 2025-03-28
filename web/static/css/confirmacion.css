@@ -1,4 +1,4 @@
- body {
+ /* body {
     font-family: Arial, sans-serif;
     color: #000000;
  }
@@ -93,4 +93,225 @@
 
 .btn-success:hover {
     background-color: #218838;
+} */
+/* Base Styles */
+body {
+    font-family: Arial, sans-serif;
+    color: #000000;
+   
+}
+
+.confirmacion-container {
+    width: 450px;
+    margin: 50px auto;
+    background: rgb(56, 57, 89);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.confirmacion-icon {
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+
+.confirmacion-titulo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.confirmacion-mensaje {
+    margin: 15px 0;
+    font-size: 16px;
+    color: #ffffff;
+}
+
+.confirmacion-detalles {
+    text-align: left;
+    margin-top: 20px;
+}
+
+.resumen-titulo {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.confirmacion-datos {
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.datos-titulo {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.confirmacion-items {
+    margin-top: 15px;
+    text-align: left;
+}
+
+.confirmacion-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.confirmacion-total {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: right;
+    margin-top: 10px;
+    color: #28a745;
+}
+
+.confirmacion-acciones {
+    margin-top: 20px;
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+/* Responsive Styles */
+
+/* Mobile Devices (up to 480px) */
+@media screen and (max-width: 480px) {
+    .confirmacion-container {
+        width: 90%;
+        margin: 20px auto;
+        padding: 15px;
+    }
+
+    .confirmacion-icon {
+        font-size: 40px;
+    }
+
+    .confirmacion-titulo {
+        font-size: 20px;
+    }
+
+    .confirmacion-mensaje {
+        font-size: 14px;
+    }
+
+    .resumen-titulo {
+        font-size: 16px;
+    }
+
+    .confirmacion-datos {
+        padding: 10px;
+    }
+
+    .datos-titulo {
+        font-size: 14px;
+    }
+
+    .confirmacion-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 8px 0;
+    }
+
+    .confirmacion-total {
+        font-size: 16px;
+    }
+
+    .btn-success {
+        width: 100%;
+        padding: 8px;
+        font-size: 14px;
+    }
+}
+
+/* Tablets (481px to 767px) */
+@media screen and (min-width: 481px) and (max-width: 767px) {
+    .confirmacion-container {
+        width: 75%;
+        margin: 30px auto;
+        padding: 20px;
+    }
+
+    .confirmacion-icon {
+        font-size: 45px;
+    }
+
+    .confirmacion-titulo {
+        font-size: 22px;
+    }
+
+    .confirmacion-mensaje {
+        font-size: 15px;
+    }
+
+    .btn-success {
+        width: 100%;
+    }
+}
+
+/* Small Desktops (768px to 1024px) */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .confirmacion-container {
+        width: 70%;
+        max-width: 600px;
+        margin: 40px auto;
+    }
+
+    .confirmacion-icon {
+        font-size: 48px;
+    }
+
+    .btn-success {
+        width: 80%;
+    }
+}
+
+/* Large Desktops (1025px to 1440px) */
+@media screen and (min-width: 1025px) and (max-width: 1440px) {
+    .confirmacion-container {
+        width: 450px;
+        margin: 50px auto;
+    }
+}
+
+/* Extra Large Desktops (1441px and above) */
+@media screen and (min-width: 1441px) {
+    .confirmacion-container {
+        width: 500px;
+        margin: 60px auto;
+    }
+}
+
+/* Universal Responsive Adjustments */
+@media screen and (max-width: 1024px) {
+    .confirmacion-detalles {
+        text-align: center;
+    }
+
+    .confirmacion-datos {
+        text-align: left;
+    }
+
+    .confirmacion-item {
+        text-align: left;
+    }
 }
