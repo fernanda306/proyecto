@@ -126,41 +126,11 @@ class ReservacionForm(forms.ModelForm):
 
 
 
-# class OrdenForm(forms.ModelForm):
-#     METODOS_PAGO =[
-#         ('nequi', 'Nequi'),
-#         ('bancolombia', 'Bancolombia'),
-#         ('contraentrega','Contraentrega')
-
-#     ]
-
-
-#     metodo_pago = forms.ChoiceField(
-
-#         choices=METODOS_PAGO,
-#         widget=forms.RadioSelect,
-#         required=True
-
-#     )
-
-#     class Meta:
-
-#         model = Orden
-#         fields = ['nombre', 'email', 'telefono', 'metodo_pago']
-#         widgets = {
-#            'nombre': forms.TextInput(attrs={'class': 'form-control',
-#     'placeholder': 'Tu nombre completo'}),
-#             'email': forms.EmailInput(attrs={'class': 'form-control',
-#     'placeholder': 'tucorreo@ejemplo.com'}),
-#             'telefono': forms.TextInput(attrs={'class': 'form-control',
-#     'placeholder': 'Tu número de teléfono'})
-# }
 
 class OrdenForm(forms.ModelForm):
     METODOS_PAGO = [
         ('nequi', 'Nequi'),
         ('bancolombia', 'Bancolombia'),
-        ('contraentrega', 'Contraentrega')
     ]
     
     # Remove this field definition if it's already defined in your model with the same choices
@@ -173,7 +143,7 @@ class OrdenForm(forms.ModelForm):
     
     class Meta:
         model = Orden
-        fields = ['nombre', 'email', 'telefono', 'metodo_pago']
+        fields = ['nombre', 'email', 'telefono', 'metodo_pago',]
         # rest of your code...
 
         widgets = {
@@ -184,3 +154,6 @@ class OrdenForm(forms.ModelForm):
              'telefono': forms.TextInput(attrs={'class': 'form-control',
      'placeholder': 'Tu número de teléfono'})
  }
+
+
+ 

@@ -92,4 +92,15 @@
 </div>
 
 
+{% if not user.is_authenticated %}
+<script>
+    Swal.fire({
+        icon: "error",
+        title: "No puedes hacer reservaciones",
+        text: "Inicia sesión para poder disfrutar de nuestras reservaciones",
+       
+    });
+</script>
+{% endif %}
+
 {% endblock %}

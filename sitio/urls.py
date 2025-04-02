@@ -60,6 +60,12 @@ urlpatterns = [
      path('historial/', views.historial, name='historial'),
 
 
+
+
      path('manual', views.manual, name='manual'),
+
+   
+
+  
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

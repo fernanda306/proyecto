@@ -5,7 +5,7 @@
 {% block content %}
 
 {% load static %}
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <link rel="stylesheet" href="{% static 'css/productos.css'%}">
 
 <div class="container">
@@ -42,7 +42,21 @@
 
 
 
-<script src=" {% static 'js/productos.js' %}"></script>
+
+
+{% if not user.is_authenticated %}
+<script>
+    Swal.fire({
+        icon: "error",
+        title: "No puede agregar al carrito",
+        text: "Inicia sesión para agregar productos al carrito",
+        footer: '<a href="{% url "login" %}">Ingresa aquí para poder agregar al carrito</a>'
+    });
+</script>
+{% endif %}
+
+
+
 
 
 {% endblock %}

@@ -195,6 +195,9 @@ def productos(request):
     
     return render(request, 'productos.html', {'productos': producto_lista})
 
+
+
+
     
 
 
