@@ -40,9 +40,9 @@ body {
 }
 
 .alert-success {
-    background-color: #50ae2a;
-    color: #3c763d;
-    border: 1px solid #65973c;
+    background-color: #54276d;
+    color: #ffffff;
+    border: 1px solid #490071;
 }
 
 .alert-error {
@@ -66,7 +66,7 @@ body {
 }
 
 .tabla1 thead {
-    background-color: rebeccapurple;
+    background-color: #563d63;
     color: white;
 }
 
@@ -110,10 +110,11 @@ body {
     border: 1px solid var(--border-color);
     border-radius: 4px;
     text-align: center;
+    color: #000000;
 }
 
 .actualizar {
-    background-color: red;
+    background-color: #490071;
     color: var(--white);
     border: none;
     padding: 0.5rem 1rem;
@@ -123,11 +124,11 @@ body {
 }
 
 .actualizar:hover {
-    background-color: #2980b9;
+    background-color: #563d63;
 }
 
 .elimiar {
-    color: #e74c3c;
+
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s ease;
@@ -165,7 +166,7 @@ body {
 }
 
 .continuar:hover, .pago:hover {
-    background-color: #2980b9;
+    background-color: #490071;
     transform: translateY(-2px);
 }
 
@@ -189,35 +190,104 @@ body {
 }
 
 /* Responsive Design */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 992px) {
     .carrito-container {
-        padding: 1rem;
-        margin: 1rem;
+      width: 95%;
     }
-
-    .tabla1 {
-        font-size: 0.9rem;
-    }
-
-    .tabla1 th, .tabla1 td {
-        padding: 0.5rem;
-    }
-
+    
     .Producto-img {
-        width: 60px;
-        height: 60px;
+      width: 60px;
+      height: 60px;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .tabla1 th,
+    .tabla1 td {
+      padding: 10px;
+    }
+  }
+  
+  @media screen and (max-width: 576px) {
+    .carrito-titulo {
+      font-size: 1.5em;
+    }
+    
+    .tabla1 {
+      display: block;
+    }
+    
+    .tabla1 thead {
+      display: none;
+    }
+    
+    .tabla1 tbody, 
+    .tabla1 tr {
+      display: block;
+      width: 100%;
+    }
+    
+    .tabla1 tr {
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 5px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .tabla1 td {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+      padding: 10px 0;
+      width: 100%;
+    }
+    
+    .tabla1 td:before {
+      content: attr(data-label);
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    
+    .Producto {
+      width: 100%;
+    }
+    
+    .control {
+      width: 100%;
+    }
+    
+    .tabla1 tfoot tr {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .tabla1 tfoot td {
+      width: 100%;
+      text-align: center;
     }
 
-    .carrito3 {
-        flex-direction: column;
-    }
-
-    .continuar, .pago {
+    .cantidad {
         width: 100%;
-        margin-bottom: 0.5rem;
     }
-}
 
+    .actualizar {
+        width: 100%;
+        text-align: center;
+    }
 
+    /* .total {
+        font-size: 1.5rem;
+        text-align: center;   
+    } */
 
+    .total2 {
+        width: 100%;
+    }
 
+  }
